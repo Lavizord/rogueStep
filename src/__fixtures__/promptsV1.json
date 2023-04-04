@@ -1,0 +1,146 @@
+[
+  {
+    "_id": 1,
+	"storyId": 1,
+    "hpChange": 0,
+    "goldChange": 0,
+    "text": "You wake up on a deserted island. You see smoke rising in the distance. What do you do?",
+    "choiceText": [
+      "Head towards the smoke.",
+      "Stay put and wait for rescue."
+    ],
+    "nextSceneId": [
+      2,
+      3
+    ]
+  },
+  {
+    "_id": 2,
+	"storyId": 1,
+    "hpChange": 0,
+    "goldChange": 0,
+    "text": "You head towards the smoke and find a tribe of natives. They welcome you and offer to help you leave the island.",
+    "nextSceneId": 4
+  },
+  {
+    "_id": 3,
+	"storyId": 1,
+    "hpChange": 0,
+    "goldChange": 0,
+    "text": "You wait for rescue, but after several days, no one comes. You start to run out of food and water. What do you do?",
+    "choiceText": [
+      "Search for food and water.",
+      "Build a shelter and wait for rescue."
+    ],
+    "nextSceneId": [
+      5,
+      6
+    ]
+  },
+  {
+    "_id": 4,
+	"storyId": 1,
+    "hpChange": 0,
+    "goldChange": 0,
+    "text": "The natives help you build a raft and give you directions to the nearest inhabited island. You set out and eventually make it back home."
+  },
+  {
+    "_id": 5,
+	"storyId": 1,
+    "hpChange": -10,
+    "goldChange": 0,
+    "text": "You search for food and water, but end up getting lost in the wilderness. You eventually find your way back to your shelter, but you're weak and hungry.",
+    "nextSceneId": 6
+  },
+  {
+    "_id": 6,
+	"storyId": 1,
+    "hpChange": -20,
+    "goldChange": 0,
+    "text": "You build a shelter and wait for rescue. After several more days, you are finally rescued, but you are weak and dehydrated."
+  },
+  {
+    "_id": 7,
+	"storyId": 1,
+    "hpChange": 0,
+    "goldChange": 0,
+    "text": "You return home and resume your life, grateful for the experience and the lessons you learned."
+  },
+  {
+    "_id": 8,
+    "hpChange": 0,
+    "goldChange": 0,
+    "text": "You come across a fork in the road. One path leads to a dark and ominous forest, while the other leads to a bustling town. Which way will you go?",
+    "choiceText": [
+      "Take the path through the forest.",
+      "Head to the town."
+    ],
+    "nextSceneId": [
+      9,
+      10
+    ]
+  },
+  {
+    "_id": 9,
+    "hpChange": -20,
+    "goldChange": -5,
+    "text": "As you make your way through the forest, you stumble upon a group of goblins. They attack you without warning, and you are forced to defend yourself.",
+    "nextSceneId": 11
+  },
+  {
+    "_id": 10,
+    "hpChange": 0,
+    "goldChange": 10,
+    "text": "You arrive in the town, which is bustling with activity. You see a merchant selling goods on the side of the road. Do you want to buy something?",
+    "choiceText": [
+      "Buy something from the merchant.",
+      "Ignore the merchant and keep exploring the town."
+    ],
+    "nextSceneId": [
+      12,
+      13
+    ]
+  },
+  {
+    "_id": 11,
+    "hpChange": -10,
+    "goldChange": -5,
+    "text": "After defeating the goblins, you notice a cave entrance nearby. Do you want to investigate?",
+    "choiceText": [
+      "Explore the cave.",
+      "Continue on your way."
+    ],
+    "nextSceneId": [
+      14,
+      15
+    ]
+  },
+  {
+    "_id": 12,
+    "hpChange": 0,
+    "goldChange": -20,
+    "text": "You buy something from the merchant, but it turns out to be a fake. You feel cheated, but you learn an important lesson about trusting strangers.",
+    "nextSceneId": 16
+  },
+  {
+    "_id": 13,
+    "hpChange": 0,
+    "goldChange": 5,
+    "text": "You explore the town further and find a hidden alleyway. You notice a small, unassuming door. Do you want to investigate?",
+    "choiceText": [
+      "Open the door and go inside.",
+      "Leave the door alone and keep exploring."
+    ],
+    "nextSceneId": [
+      17,
+      18
+    ]
+  },
+  {
+    "_id": 14,
+    "hpChange": -10,
+    "goldChange": -10,
+    "text": "As you explore the cave, you encounter a pack of wolves. They are fierce and aggressive, and you must fight for your life.",
+    "nextSceneId": 19
+  }
+]
