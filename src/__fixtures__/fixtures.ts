@@ -42,7 +42,6 @@ export const storyPrompts = [
 ]
 
 
-// TODO: Tirar a string  das propriedades 
 // TODO: Implementar o jsObject.filter() de forma a filtrar os objetos retornados do array.
 export const nextPrompts = [
     {
@@ -54,34 +53,214 @@ export const nextPrompts = [
         ]
     },
     {
-        "hpChange": -3,
-        "goldChange": 50,
-        "text": "You are a notorious pirate on the hunt for a legendary treasure that is said to grant eternal life. But the treasure is guarded by a powerful sea monster. Do you risk your crew's lives to claim the treasure?"
+        hpChange: -3,
+        goldChange: 50,
+        text: "You are a notorious pirate on the hunt for a legendary treasure that is said to grant eternal life. But the treasure is guarded by a powerful sea monster. Do you risk your crew's lives to claim the treasure?"
         
     },
     {
-        "hpChange": -10,
-        "goldChange": -25,
-        "text": "You find yourself trapped in a haunted house with a malevolent ghost that preys on your fears. Can you find a way to banish the ghost and escape the house alive?"
+        hpChange: -10,
+        goldChange: -25,
+        text: "You find yourself trapped in a haunted house with a malevolent ghost that preys on your fears. Can you find a way to banish the ghost and escape the house alive?"
     },
     {
-        "hpChange": 7,
-        "goldChange": 100,
-        "text": "You are a gladiator fighting for your freedom in an ancient arena. Your next opponent is a fierce lion that has never been defeated. Can you overcome the odds and emerge victorious?"
+        hpChange: 7,
+        goldChange: 100,
+        text: "You are a gladiator fighting for your freedom in an ancient arena. Your next opponent is a fierce lion that has never been defeated. Can you overcome the odds and emerge victorious?"
     },
     {    
-        "hpChange": 5,    
-        "goldChange": -10,    
-        "text": "You are a member of a rebellion fighting against an oppressive government. Your next mission is to infiltrate a heavily fortified base and steal classified information. Will you succeed or will the mission be your downfall?"  
+        hpChange: 5,    
+        goldChange: -10,    
+        text: "You are a member of a rebellion fighting against an oppressive government. Your next mission is to infiltrate a heavily fortified base and steal classified information. Will you succeed or will the mission be your downfall?"  
     },  
     {    
-        "hpChange": 10,    
-        "goldChange": -50,    
-        "text": "You are a powerful mage on a quest to vanquish an evil demon that has been terrorizing a nearby town. The demon is impervious to magic, so you must find a way to defeat it using only your wits and strength."  
+        hpChange: 10,    
+        goldChange: -50,    
+        text: "You are a powerful mage on a quest to vanquish an evil demon that has been terrorizing a nearby town. The demon is impervious to magic, so you must find a way to defeat it using only your wits and strength."  
     },  
     {    
-        "hpChange": 2,    
-        "goldChange": 20,    
-        "text": "You are a treasure hunter searching for a lost city filled with untold riches. But the city is guarded by a powerful dragon that has never been defeated. Will you be the first to conquer the dragon and claim the treasure?"  
+        hpChange: 2,    
+        goldChange: 20,    
+        text: "You are a treasure hunter searching for a lost city filled with untold riches. But the city is guarded by a powerful dragon that has never been defeated. Will you be the first to conquer the dragon and claim the treasure?"  
     },
+]
+
+
+/* 
+Mockup dos dados para serem gerados no chat gpt.
+
+i: 13,
+s: 2,
+h: 0,
+g: 5,
+t: "You explore the town further and find a hidden alleyway. You notice a small, unassuming door. Do you want to investigate?",
+n: [
+    {
+        nsid: 17,
+        c: "Open the door and go inside"
+    },
+    {
+        nsid: 18,
+        c: "Leave the door alone and keep exploring.",
+    },
+]
+*/
+
+export const advancedPrompts1 = [
+{
+    _id: 1,
+    type: 'initial',
+    storyId: 1,
+    hpChange: 0,
+    goldChange: 0,
+    text: "You wake up on a deserted island. You see smoke rising in the distance. What do you do?",
+    choiceText: [
+        "Head towards the smoke.",
+        "Stay put and wait for rescue."
+    ],
+    nextSceneId: [
+        2,
+        3
+    ]
+},
+{
+    _id: 2,
+    storyId: 1,
+    hpChange: 0,
+    goldChange: 0,
+    text: "You head towards the smoke and find a tribe of natives. They welcome you and offer to help you leave the island.",
+    nextSceneId: 4
+},
+{
+    _id: 3,
+    storyId: 1,
+    hpChange: 0,
+    goldChange: 0,
+    text: "You wait for rescue, but after several days, no one comes. You start to run out of food and water. What do you do?",
+    choiceText: [
+        "Search for food and water.",
+        "Build a shelter and wait for rescue."
+    ],
+    nextSceneId: [
+        5,
+        6
+    ]
+},
+{
+    _id: 4,
+    storyId: 1,
+    hpChange: 0,
+    goldChange: 0,
+    text: "The natives help you build a raft and give you directions to the nearest inhabited island. You set out and eventually make it back home."
+},
+{
+    _id: 5,
+    storyId: 1,
+    hpChange: -10,
+    goldChange: 0,
+    text: "You search for food and water, but end up getting lost in the wilderness. You eventually find your way back to your shelter, but you're weak and hungry.",
+    nextSceneId: 6
+},
+{
+    _id: 6,
+    storyId: 1,
+    hpChange: -20,
+    goldChange: 0,
+    text: "You build a shelter and wait for rescue. After several more days, you are finally rescued, but you are weak and dehydrated."
+},
+{
+    _id: 7,
+    type: 'end',
+    storyId: 1,
+    hpChange: 0,
+    goldChange: 0,
+    text: "You return home and resume your life, grateful for the experience and the lessons you learned."
+},
+{
+    _id: 8,
+    type: 'initial',
+    storyId: 2,
+    hpChange: 0,
+    goldChange: 0,
+    text: "You come across a fork in the road. One path leads to a dark and ominous forest, while the other leads to a bustling town. Which way will you go?",
+    choiceText: [
+        "Take the path through the forest.",
+        "Head to the town."
+    ],
+    nextSceneId: [
+        9,
+        10
+    ]
+},
+{
+    _id: 9,
+    storyId: 2,
+    hpChange: -20,
+    goldChange: -5,
+    text: "As you make your way through the forest, you stumble upon a group of goblins. They attack you without warning, and you are forced to defend yourself.",
+    nextSceneId: 11
+    },
+    {
+    _id: 10,
+    storyId: 2,
+    hpChange: 0,
+    goldChange: 10,
+    text: "You arrive in the town, which is bustling with activity. You see a merchant selling goods on the side of the road. Do you want to buy something?",
+    choiceText: [
+        "Buy something from the merchant.",
+        "Ignore the merchant and keep exploring the town."
+    ],
+    nextSceneId: [
+        12,
+        13
+    ]
+},
+{
+    _id: 11,
+    storyId: 2,
+    hpChange: -10,
+    goldChange: -5,
+    text: "After defeating the goblins, you notice a cave entrance nearby. Do you want to investigate?",
+    choiceText: [
+        "Explore the cave.",
+        "Continue on your way."
+    ],
+    nextSceneId: [
+        14,
+        15
+    ]
+},
+{
+    _id: 12,
+    storyId: 2,
+    hpChange: 0,
+    goldChange: -20,
+    text: "You buy something from the merchant, but it turns out to be a fake. You feel cheated, but you learn an important lesson about trusting strangers.",
+    nextSceneId: 16
+},
+{
+    _id: 13,
+    storyId: 2,
+    hpChange: 0,
+    goldChange: 5,
+    text: "You explore the town further and find a hidden alleyway. You notice a small, unassuming door. Do you want to investigate?",
+    nextScene: [
+        {
+            nextSceneId: 17,
+            choiceText: "Open the door and go inside"
+        },
+        {
+            nextSceneId: 18,
+            choiceText: "Leave the door alone and keep exploring.",
+        },
+    ]
+},
+{
+    _id: 14,
+    storyId: 2,
+    hpChange: -10,
+    goldChange: -10,
+    text: "As you explore the cave, you encounter a pack of wolves. They are fierce and aggressive, and you must fight for your life.",
+    nextSceneId: 19
+} 
 ]
