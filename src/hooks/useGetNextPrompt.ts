@@ -2,7 +2,7 @@ import { addAbortSignal } from 'stream';
 import { storyPrompts, nextPrompts, advancedPrompts1 } from '../__fixtures__/fixtures';
 import useAdventureStore from '../stores/useAdventureStore';
 import usePlaythroughStore from '../stores/usePlaythroughStore';
-import useUserStore from './useUserStore';
+import useUserStore from '../stores/useUserStore';
 import { randomIntFromInterval } from '../utils/utils';
 import { useState } from 'react';
 
