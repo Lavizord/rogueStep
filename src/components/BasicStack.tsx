@@ -49,10 +49,10 @@ const BasicStack:React.FC = () => {
             spacing={2}
           >
             <Item>
-              <TextArea text={goldChange.toString()} />
+              <TextArea text={goldChange.toString()+" gold Change!"} />
             </Item>
             <Item>
-              <TextArea text={hpChange.toString()} />
+              <TextArea text={hpChange.toString()+" hp Change!"} />
             </Item>
           </Stack>
             <SceneChoice prompt={prompt} />                    
