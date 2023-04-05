@@ -35,8 +35,8 @@ const BasicStack:React.FC = () => {
 
     return (
       <>
-      <Header gold={gold} hp={hp} />
       <Box sx={{ width: '100%' }}>
+        <Header gold={gold} hp={hp} />
         <Stack spacing={2}>
           <Item>
             <TextArea text={text}/>
