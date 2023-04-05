@@ -1,91 +1,3 @@
-export const storyPrompts = [        
-    "You discover that you have the ability to time travel, and you begin to explore the possibilities.",
-    "You and your friends accidentally summon a demon, and you must find a way to send it back to where it came from.",
-    "You witness the arrival of an alien race on Earth, and they bring with them an unexpected proposal for humanity.",
-    "You are a detective tasked with solving a murder case in a world where all forms of lying are impossible.",
-    "You wake up with no memory of your past, only to discover that you are a notorious criminal on the run.",
-    "You inherit an old mansion with a dark secret, and you soon realize that you are not alone in the house.",
-    "You are one of the survivors in a post-apocalyptic world overrun by zombies, and you must navigate the dangers of this new world.",
-    "You discover that you are the last remaining member of a long-lost civilization, and you must uncover the secrets of your people.",
-    "You wake up on a deserted island with no memory of how you got there, and you must find a way to survive and escape.",
-    "You are part of a team of astronauts on a mission to Mars, and you discover something unexpected on the Red Planet.",
-    "You discover that you have the ability to talk to animals, and you begin to see the world in a whole new way.",
-    "You join a group of rebels in an attempt to overthrow a corrupt government and bring about change.",
-    "You go on a quest to find a legendary treasure, facing obstacles and dangers along the way.",
-    "You wake up one day with the ability to see the future, and you must decide how to use this gift.",
-    "Your dreams start to become reality, and you must figure out what is happening and why.",
-    "You become a superhero with unexpected powers, and you must learn to use them for good.",
-    "You and your friends go on a road trip that takes a dangerous turn, and you must find a way to survive.",
-    "You must navigate a virtual reality world to save your loved ones, facing challenges and obstacles along the way.",
-    "You discover that you are a long-lost member of a royal family, and you must learn to navigate the world of royalty.",
-    "You wake up in a parallel universe where everything is different, and you must find a way to get back to your own reality.",
-    "You are a space explorer on a mission to find a new planet for humanity to inhabit.",
-    "You wake up with the ability to read people's thoughts, and you discover secrets you wish you hadn't.",
-    "You and your team are on a research expedition to a remote jungle, where you discover something ancient and powerful.",
-    "You wake up in a world where everyone has superpowers, but you seem to be the only one without them.",
-    "You discover a hidden underground city, and you must unravel the mysteries surrounding it.",
-    "You are a time traveler on a mission to prevent a catastrophic event from occurring in the future.",
-    "You wake up in a world where everyone speaks a different language, and you must find a way to communicate and survive.",
-    "You are a survivor in a world where all technology suddenly stops working, and you must learn to live without it.",
-    "You discover that you have the power to bring fictional characters to life, but soon realize the consequences of doing so.",
-    "You are a detective trying to solve a case involving a series of bizarre and unexplainable events.",
-    "You wake up in a world where dreams are real, and you must navigate through different dreamscapes to find your way back to reality.",
-    "You find a mysterious book that seems to hold the key to unlocking an ancient and powerful magic.",
-    "You discover that you have the power to manipulate reality itself, but soon realize that with great power comes great responsibility.",
-    "You are a survivor of a plane crash in a remote wilderness, and you must find a way to survive and get rescued.",
-    "You are a soldier in a war-torn world, and you must make difficult choices that will determine the fate of humanity.",
-    "You wake up with no memories of your past, and you must piece together your identity and past life.",
-    "You discover a hidden portal to another dimension, and you must navigate its dangers and mysteries.",
-    "You are a survivor in a world where everyone has turned into vampires, and you must find a way to survive and resist their temptations.",
-    "You discover that you have the power to control the weather, and must decide how to use it for good or for personal gain.",
-    "You wake up to find that you are the only person left on Earth, and you must find out what happened and if there is a way to reverse it."
-]
-
-
-// TODO: Implementar o jsObject.filter() de forma a filtrar os objetos retornados do array.
-export const nextPrompts = [
-    {
-        hpChange: 5,
-        goldChange: -10,
-        text: "You discover an enchanted well deep in the forest that can heal any wound, but the price is a piece of your soul. Do you take the risk and drink from the well?",
-        optionalStores: [
-            11, 12
-        ]
-    },
-    {
-        hpChange: -3,
-        goldChange: 50,
-        text: "You are a notorious pirate on the hunt for a legendary treasure that is said to grant eternal life. But the treasure is guarded by a powerful sea monster. Do you risk your crew's lives to claim the treasure?"
-        
-    },
-    {
-        hpChange: -10,
-        goldChange: -25,
-        text: "You find yourself trapped in a haunted house with a malevolent ghost that preys on your fears. Can you find a way to banish the ghost and escape the house alive?"
-    },
-    {
-        hpChange: 7,
-        goldChange: 100,
-        text: "You are a gladiator fighting for your freedom in an ancient arena. Your next opponent is a fierce lion that has never been defeated. Can you overcome the odds and emerge victorious?"
-    },
-    {    
-        hpChange: 5,    
-        goldChange: -10,    
-        text: "You are a member of a rebellion fighting against an oppressive government. Your next mission is to infiltrate a heavily fortified base and steal classified information. Will you succeed or will the mission be your downfall?"  
-    },  
-    {    
-        hpChange: 10,    
-        goldChange: -50,    
-        text: "You are a powerful mage on a quest to vanquish an evil demon that has been terrorizing a nearby town. The demon is impervious to magic, so you must find a way to defeat it using only your wits and strength."  
-    },  
-    {    
-        hpChange: 2,    
-        goldChange: 20,    
-        text: "You are a treasure hunter searching for a lost city filled with untold riches. But the city is guarded by a powerful dragon that has never been defeated. Will you be the first to conquer the dragon and claim the treasure?"  
-    },
-]
-
-
 /* 
 Mockup dos dados para serem gerados no chat gpt.
 
@@ -106,7 +18,21 @@ n: [
 ]
 */
 
-export const advancedPrompts1 = [
+export interface NextScene {
+    nextSceneId?: number;
+    choiceText?: string;
+}
+export interface Scene {
+    _id: number;
+    type?: string;
+    storyId: number;
+    hpChange: number;
+    goldChange: number;
+    text: string;
+    nextScene: NextScene[];
+}
+
+export const advancedPrompts1: Scene[] = [
 {
     _id: 1,
     type: 'initial',
@@ -114,13 +40,15 @@ export const advancedPrompts1 = [
     hpChange: 0,
     goldChange: 0,
     text: "You wake up on a deserted island. You see smoke rising in the distance. What do you do?",
-    choiceText: [
-        "Head towards the smoke.",
-        "Stay put and wait for rescue."
-    ],
-    nextSceneId: [
-        2,
-        3
+    nextScene: [
+        {
+            nextSceneId: 2,
+            choiceText: "Head towards the smoke."
+        },
+        {
+            nextSceneId: 3,
+            choiceText: "Stay put and wait for rescue."
+        }
     ]
 },
 {
@@ -129,7 +57,11 @@ export const advancedPrompts1 = [
     hpChange: 0,
     goldChange: 0,
     text: "You head towards the smoke and find a tribe of natives. They welcome you and offer to help you leave the island.",
-    nextSceneId: 4
+    nextScene: [
+        {
+            nextSceneId: 4
+        }
+    ]
 },
 {
     _id: 3,
@@ -137,21 +69,25 @@ export const advancedPrompts1 = [
     hpChange: 0,
     goldChange: 0,
     text: "You wait for rescue, but after several days, no one comes. You start to run out of food and water. What do you do?",
-    choiceText: [
-        "Search for food and water.",
-        "Build a shelter and wait for rescue."
-    ],
-    nextSceneId: [
-        5,
-        6
+    nextScene: [
+        {
+            nextSceneId: 5,
+            choiceText: "Search for food and water."
+        },
+        {
+            nextSceneId: 6,
+            choiceText: "Build a shelter and wait for rescue."
+        }
     ]
 },
 {
     _id: 4,
+    type: 'end',
     storyId: 1,
     hpChange: 0,
     goldChange: 0,
-    text: "The natives help you build a raft and give you directions to the nearest inhabited island. You set out and eventually make it back home."
+    text: "The natives help you build a raft and give you directions to the nearest inhabited island. You set out and eventually make it back home.",
+    nextScene: []
 },
 {
     _id: 5,
@@ -159,14 +95,21 @@ export const advancedPrompts1 = [
     hpChange: -10,
     goldChange: 0,
     text: "You search for food and water, but end up getting lost in the wilderness. You eventually find your way back to your shelter, but you're weak and hungry.",
-    nextSceneId: 6
+    nextScene: [
+        {
+            nextSceneId: 6,
+            choiceText: "Wait."
+        }
+    ]
 },
 {
     _id: 6,
+    type: 'end',
     storyId: 1,
     hpChange: -20,
     goldChange: 0,
-    text: "You build a shelter and wait for rescue. After several more days, you are finally rescued, but you are weak and dehydrated."
+    text: "You build a shelter and wait for rescue. After several more days, you are finally rescued, but you are weak and dehydrated.",
+    nextScene: []
 },
 {
     _id: 7,
@@ -174,7 +117,8 @@ export const advancedPrompts1 = [
     storyId: 1,
     hpChange: 0,
     goldChange: 0,
-    text: "You return home and resume your life, grateful for the experience and the lessons you learned."
+    text: "You return home and resume your life, grateful for the experience and the lessons you learned.",
+    nextScene: []
 },
 {
     _id: 8,
@@ -183,14 +127,16 @@ export const advancedPrompts1 = [
     hpChange: 0,
     goldChange: 0,
     text: "You come across a fork in the road. One path leads to a dark and ominous forest, while the other leads to a bustling town. Which way will you go?",
-    choiceText: [
-        "Take the path through the forest.",
-        "Head to the town."
-    ],
-    nextSceneId: [
-        9,
-        10
-    ]
+    nextScene: [
+        {
+            nextSceneId: 9,
+            choiceText:"Take the path through the forest."
+        },
+        {
+            nextSceneId: 10,
+            choiceText:"Head to the town."
+        }
+    ]       
 },
 {
     _id: 9,
@@ -198,7 +144,12 @@ export const advancedPrompts1 = [
     hpChange: -20,
     goldChange: -5,
     text: "As you make your way through the forest, you stumble upon a group of goblins. They attack you without warning, and you are forced to defend yourself.",
-    nextSceneId: 11
+    nextScene: [
+        {
+            nextSceneId: 11,
+            choiceText: "Fight!"
+        }
+    ]
     },
     {
     _id: 10,
@@ -206,13 +157,15 @@ export const advancedPrompts1 = [
     hpChange: 0,
     goldChange: 10,
     text: "You arrive in the town, which is bustling with activity. You see a merchant selling goods on the side of the road. Do you want to buy something?",
-    choiceText: [
-        "Buy something from the merchant.",
-        "Ignore the merchant and keep exploring the town."
-    ],
-    nextSceneId: [
-        12,
-        13
+    nextScene: [
+        {
+            nextSceneId: 12,
+            choiceText: "Buy something from the merchant."
+        },
+        {
+            nextSceneId: 13,
+            choiceText: "Ignore the merchant and keep exploring the town."
+        }
     ]
 },
 {
@@ -221,22 +174,25 @@ export const advancedPrompts1 = [
     hpChange: -10,
     goldChange: -5,
     text: "After defeating the goblins, you notice a cave entrance nearby. Do you want to investigate?",
-    choiceText: [
-        "Explore the cave.",
-        "Continue on your way."
-    ],
-    nextSceneId: [
-        14,
-        15
+    nextScene: [
+        {
+            nextSceneId: 14,
+            choiceText: "Explore the cave."
+        },
+        {
+            nextSceneId: 15,
+            choiceText: "Continue on your way."
+        }
     ]
 },
 {
     _id: 12,
+    type: 'end',
     storyId: 2,
     hpChange: 0,
     goldChange: -20,
     text: "You buy something from the merchant, but it turns out to be a fake. You feel cheated, but you learn an important lesson about trusting strangers.",
-    nextSceneId: 16
+    nextScene: []
 },
 {
     _id: 13,
@@ -261,6 +217,20 @@ export const advancedPrompts1 = [
     hpChange: -10,
     goldChange: -10,
     text: "As you explore the cave, you encounter a pack of wolves. They are fierce and aggressive, and you must fight for your life.",
-    nextSceneId: 19
-} 
+    nextScene: [
+        {
+            nextSceneId: 15,
+            choiceText:"Take the path through the forest."
+        }
+    ]
+},
+{
+    _id: 15,
+    type: 'end',
+    storyId: 2,
+    hpChange: 0,
+    goldChange: 2,
+    text: "You fight and win against the wolfs! Time to take another step!",
+    nextScene: []
+}  
 ]

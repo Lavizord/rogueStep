@@ -9,6 +9,7 @@ import usePlaythroughStore from '../stores/usePlaythroughStore';
 import useAdventureStore from '../stores/useAdventureStore';
 import TextArea from './TextArea';
 import Header from './Header';
+import SceneChoice from './SceneChoice';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -29,9 +30,9 @@ const BasicStack:React.FC = () => {
     const { gold, hp, items } = usePlaythroughStore();
     const { steps } = useAdventureStore();
  
-    const { text, goldChange, hpChange} = prompt;
+    const { text, goldChange, hpChange, nextScene } = prompt;
 
-    console.log(gold, hp, items, steps);
+    //console.log(gold, hp, items, steps);
 
     return (
       <>
@@ -54,15 +55,7 @@ const BasicStack:React.FC = () => {
               <TextArea text={hpChange.toString()} />
             </Item>
           </Stack>
-          <Stack 
-            direction="row"
-            justifyContent='center'
-            divider={<Divider orientation="vertical" flexItem />}
-            spacing={2}
-          >
-            {/* <Item>Choice one.</Item>       
-            <Item>Choice Two.</Item>   */}     
-          </Stack>
+            <SceneChoice prompt={prompt} />                    
           <Item>
             <Button variant="contained" onClick={() => getNextPrompt()}>Take a Step...</Button>
           </Item>
