@@ -10,6 +10,7 @@ import useAdventureStore from '../stores/useAdventureStore';
 import TextArea from './TextArea';
 import Header from './Header';
 import SceneChoice from './SceneChoice';
+import { isUndefined } from 'lodash';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -58,7 +59,10 @@ const BasicStack:React.FC = () => {
           </Stack>
             <SceneChoice nextScene={nextScene} getPromptById={getPromptById} />                    
           <Item>
-            <Button variant="contained" onClick={() => getNextPrompt()}>Take a Step...</Button>
+            { 
+              !isUndefined(nextScene[0]) ? <></> : 
+              <Button variant="contained" onClick={() => getNextPrompt()}>Take a Step...</Button>
+            }
           </Item>
         </Stack>
       </Box>
