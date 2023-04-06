@@ -93,7 +93,7 @@ Here is an example with 6 scenes that have 3 endings, but you can have less than
   1 - 1 a 6 com 3 fins.
   2 - 1 a 7 
 */
-export const advancedPrompts1 = [
+export const scenes = [
   {
     i: 1,
     h: 0,

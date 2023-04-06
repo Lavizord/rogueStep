@@ -5,10 +5,10 @@ import { NextScene } from '../__fixtures__/fixtures';
 
 type Props = {
   nextScene: NextScene[];
-  getPromptById: (id: number) => void;
+  getSceneById: (id: number) => void;
 }
 
-const SceneChoice:React.FC<Props> = ({ nextScene, getPromptById } : Props) => {
+const SceneChoice:React.FC<Props> = ({ nextScene, getSceneById } : Props) => {
 
   return (
     <Box gap={4} sx={{
@@ -19,7 +19,7 @@ const SceneChoice:React.FC<Props> = ({ nextScene, getPromptById } : Props) => {
     }}>
       {nextScene.map((choice) => {
         if(isUndefined(choice.nextSceneId)) return <></>;
-        return <ChoiceCard key={choice.nextSceneId} choice={choice} getPromptById={getPromptById}/>;
+        return <ChoiceCard key={choice.nextSceneId} choice={choice} getSceneById={getSceneById}/>;
         })}
     </Box>
   )

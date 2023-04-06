@@ -1,21 +1,19 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import useGetNextPrompt from '../hooks/useGetNextPrompt';
 import { NextScene } from '../__fixtures__/fixtures';
 
 type CardProps = {
   cardText: string;
   cardId: number;
-  getPromptById: (id: number) => void;
+  getSceneById: (id: number) => void;
 }
 
-const card = ({ cardText, cardId, getPromptById } : CardProps) => 
-  <React.Fragment>
+const card = ({ cardText, cardId, getSceneById } : CardProps) => 
+  <>
     <CardContent>
       <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
         {cardText}
@@ -29,20 +27,20 @@ const card = ({ cardText, cardId, getPromptById } : CardProps) =>
         style={{
           fontSize: "12px"
         }}
-        onClick={() => getPromptById(cardId)}
+        onClick={() => getSceneById(cardId)}
       >
         Take a step in this direction... {cardId}
       </Button>
     </CardActions>
-  </React.Fragment>
+  </>
 ;
 
 type Props = {
   choice: NextScene;
-  getPromptById: (id: number) => void;
+  getSceneById: (id: number) => void;
 }
 
-const ChoiceCard:React.FC<Props> = ({ choice, getPromptById } : Props) => {
+const ChoiceCard:React.FC<Props> = ({ choice, getSceneById } : Props) => {
     
     return (
       <Box sx={{ maxWidth: 275 }}>
@@ -57,7 +55,7 @@ const ChoiceCard:React.FC<Props> = ({ choice, getPromptById } : Props) => {
             {
               cardText: choice.choiceText as string, 
               cardId: choice.nextSceneId as number, 
-              getPromptById: getPromptById
+              getSceneById: getSceneById
             }
           )}
         </Card>
