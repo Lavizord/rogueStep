@@ -59,7 +59,8 @@ export const advancedPrompts1: Scene[] = [
     text: "You head towards the smoke and find a tribe of natives. They welcome you and offer to help you leave the island.",
     nextScene: [
         {
-            nextSceneId: 4
+            nextSceneId: 4,
+            choiceText: "Leave the island."
         }
     ]
 },

@@ -5,34 +5,22 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { useEffect, useState } from 'react';
 import useGetNextPrompt from '../hooks/useGetNextPrompt';
-import { isUndefined } from 'lodash';
 import { NextScene } from '../__fixtures__/fixtures';
 
-
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-  >
-    •
-  </Box>
-);
-
-type Card = {
+type CardProps = {
   cardText: string;
   cardId: number;
   getPromptById: (id: number) => void;
 }
 
-const card = ({ cardText, cardId, getPromptById } : Card) => 
+const card = ({ cardText, cardId, getPromptById } : CardProps) => 
   <React.Fragment>
     <CardContent>
       <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
         {cardText}
       </Typography>
-     </CardContent>
+    </CardContent>
     <CardActions>
       <Button 
         variant="contained"
@@ -51,13 +39,10 @@ const card = ({ cardText, cardId, getPromptById } : Card) =>
 
 type Props = {
   choice: NextScene;
+  getPromptById: (id: number) => void;
 }
 
-const ChoiceCard:React.FC<Props> = ({ choice } : Props) => {
-
-  const {
-    getPromptById,
-  } = useGetNextPrompt();
+const ChoiceCard:React.FC<Props> = ({ choice, getPromptById } : Props) => {
     
     return (
       <Box sx={{ maxWidth: 275 }}>

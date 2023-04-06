@@ -24,6 +24,7 @@ const BasicStack:React.FC = () => {
   
     const {
       getNextPrompt,
+      getPromptById,
       prompt
     } = useGetNextPrompt();
 
@@ -55,7 +56,7 @@ const BasicStack:React.FC = () => {
               <TextArea text={hpChange.toString()+" hp Change!"} />
             </Item>
           </Stack>
-            <SceneChoice prompt={prompt} />                    
+            <SceneChoice nextScene={nextScene} getPromptById={getPromptById} />                    
           <Item>
             <Button variant="contained" onClick={() => getNextPrompt()}>Take a Step...</Button>
           </Item>

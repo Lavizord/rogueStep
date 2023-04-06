@@ -1,19 +1,14 @@
-import { Typography } from "@mui/material"; 
 import { Box } from "@mui/material";
 import ChoiceCard from "./ChoiceCard";
-import useGetNextPrompt from "../hooks/useGetNextPrompt";
-import { useMemo } from "react";
 import { isUndefined } from "lodash";
-import {Scene} from '../__fixtures__/fixtures';
+import { NextScene } from '../__fixtures__/fixtures';
 
 type Props = {
-  prompt: Scene;
+  nextScene: NextScene[];
+  getPromptById: (id: number) => void;
 }
 
-const SceneChoice:React.FC<Props> = ({ prompt } : Props) => {
-
-  
-  console.log(prompt);
+const SceneChoice:React.FC<Props> = ({ nextScene, getPromptById } : Props) => {
 
   return (
     <Box gap={4} sx={{
@@ -22,9 +17,11 @@ const SceneChoice:React.FC<Props> = ({ prompt } : Props) => {
         justifyContent: "center",
         width: "100%"
     }}>
-      {prompt.nextScene.map((choice) => {
-        if(!isUndefined(choice.nextSceneId))
-          return <ChoiceCard key={choice.nextSceneId} choice={choice} />;
+      {nextScene.map((choice) => {
+        console.log(choice);
+        if(isUndefined(choice.nextSceneId)) return <></>;
+        console.log('passou')
+        return <ChoiceCard key={choice.nextSceneId} choice={choice} getPromptById={getPromptById}/>;
         })}
     </Box>
   )

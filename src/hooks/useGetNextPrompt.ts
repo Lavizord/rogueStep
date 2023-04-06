@@ -45,6 +45,13 @@ const useGetNextPrompt = () => {
 
   }
 
+  const randomizeInitialPrompt = () => {
+    const initialPrompts = advancedPrompts1.filter((prompt) => (prompt.type === 'initial'));
+    
+    const nextPrompt = initialPrompts[randomIntFromInterval(0, initialPrompts.length)];
+    setPrompt(nextPrompt);
+  }
+
   const PlayerDeathCheck = () => {
     if( hp <= 0) {
       // mostrar prompt de game over com botao de restart
@@ -60,31 +67,31 @@ const useGetNextPrompt = () => {
     // const filter = advancedPrompts1.filter((a) => a.hpChange === 5);
     // console.log(filter);
     // console.log(filter[randomIntFromInterval(0, filter.length)]);
-    const rndmInterval = randomIntFromInterval(0, advancedPrompts1.length);
-    const newPrompt = advancedPrompts1[rndmInterval];
-    setPrompt(newPrompt);
+    /* const rndmInterval = randomIntFromInterval(0, advancedPrompts1.length);
+    const newPrompt = advancedPrompts1[rndmInterval]; */
+
+    randomizeInitialPrompt()
     addSteps(1);
-    addHp(newPrompt.hpChange);
-    addGold(newPrompt.goldChange);
+    addHp(prompt.hpChange);
+    addGold(prompt.goldChange);
 
     PlayerDeathCheck();
     
   };
   
   const getPromptById = (id: number) => {
-    console.log('prompt by id ', id);
-    
+   
     const newPrompt = advancedPrompts1.find((scene) => scene._id === id);
-    console.log('prompt ', newPrompt);
 
     if(!isUndefined(newPrompt))
     {
-      setPrompt(newPrompt);
+      console.log(newPrompt._id);
       addSteps(1);
       addHp(newPrompt.hpChange);
       addGold(newPrompt.goldChange);
+      setPrompt(newPrompt);
     }
-    else getInitialPrompt();
+    else randomizeInitialPrompt();
   }
 
   return {
