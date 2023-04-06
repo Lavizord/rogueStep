@@ -13,7 +13,7 @@ export interface Scene {
     itemIds?: number[];
 }
 
-export const advancedPrompts1: Scene[] = [
+export const scenes: Scene[] = [
 {
     _id: 1,
     type: 'initial',

@@ -4,7 +4,7 @@ type Props = {
   text?: string;
 }
 
-const TakeAStepText = ( { text = 'Take a step...' } : Props ) => {
+const SceneText = ( { text = 'Take a step...' } : Props ) => {
 
   return (
     <Typography variant="body1" gutterBottom>
@@ -13,4 +13,4 @@ const TakeAStepText = ( { text = 'Take a step...' } : Props ) => {
   )
 }
 
-export default TakeAStepText;
+export default SceneText;
