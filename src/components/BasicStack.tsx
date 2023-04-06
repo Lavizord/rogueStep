@@ -10,8 +10,9 @@ import useAdventureStore from '../stores/useAdventureStore';
 import TextArea from './TextArea';
 import Header from './Header';
 import SceneChoice from './SceneChoice';
+import { isUndefined } from 'lodash';
 
-const Item = styled(Paper)(({ theme }) => ({
+const Item = styled(Paper)(({ theme}) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -19,25 +20,40 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+const GoldItem = styled(Paper)(({ theme}) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? 'gold' : 'gold',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+
+const HealthItem = styled(Paper)(({ theme}) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? 'red' : 'red',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+
+
 
 const BasicStack:React.FC = () => {
   
-    const {
-      getNextPrompt,
-      getPromptById,
-      prompt
-    } = useGetNextPrompt();
+  const {
+    getNextPrompt,
+    getPromptById,
+    prompt
+  } = useGetNextPrompt();
 
-    const { gold, hp, items } = usePlaythroughStore();
-    const { steps } = useAdventureStore();
- 
-    const { text, goldChange, hpChange, nextScene } = prompt;
+  const { gold, hp, items } = usePlaythroughStore();
+  const { steps } = useAdventureStore();
 
-    //console.log(gold, hp, items, steps);
+  const { text, goldChange, hpChange, nextScene } = prompt;
 
-    return (
-      <>
-      <Box sx={{ width: '100%' }}>
+  return (
+    <>
+      <Box sx={{ width: '100%'}}>
         <Header gold={gold} hp={hp} />
         <Stack spacing={2}>
           <Item>
@@ -49,16 +65,19 @@ const BasicStack:React.FC = () => {
             divider={<Divider orientation="vertical" flexItem />}
             spacing={2}
           >
-            <Item>
+            <GoldItem>
               <TextArea text={goldChange.toString()+" gold Change!"} />
-            </Item>
-            <Item>
+            </GoldItem>
+            <HealthItem>
               <TextArea text={hpChange.toString()+" hp Change!"} />
-            </Item>
+            </HealthItem>
           </Stack>
             <SceneChoice nextScene={nextScene} getPromptById={getPromptById} />                    
           <Item>
-            <Button variant="contained" onClick={() => getNextPrompt()}>Take a Step...</Button>
+            { 
+              !isUndefined(nextScene[0]) ? <></> : 
+              <Button variant="contained" onClick={() => getNextPrompt()}>Take a Step...</Button>
+            }
           </Item>
         </Stack>
       </Box>
