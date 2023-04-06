@@ -1,23 +1,3 @@
-/* 
-Mockup dos dados para serem gerados no chat gpt.
-
-i: 13,
-s: 2,
-h: 0,
-g: 5,
-t: "You explore the town further and find a hidden alleyway. You notice a small, unassuming door. Do you want to investigate?",
-n: [
-    {
-        nsid: 17,
-        c: "Open the door and go inside"
-    },
-    {
-        nsid: 18,
-        c: "Leave the door alone and keep exploring.",
-    },
-]
-*/
-
 export interface NextScene {
     nextSceneId?: number;
     choiceText?: string;
@@ -30,6 +10,7 @@ export interface Scene {
     goldChange: number;
     text: string;
     nextScene: NextScene[];
+    itemIds?: number[];
 }
 
 export const advancedPrompts1: Scene[] = [
@@ -88,7 +69,8 @@ export const advancedPrompts1: Scene[] = [
     hpChange: 0,
     goldChange: 0,
     text: "The natives help you build a raft and give you directions to the nearest inhabited island. You set out and eventually make it back home.",
-    nextScene: []
+    nextScene: [],
+    itemIds:[2]
 },
 {
     _id: 5,

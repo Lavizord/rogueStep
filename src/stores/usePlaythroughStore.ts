@@ -1,29 +1,34 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware'
+import { Item } from '../__fixtures__/itemsFixtures';
 
-type Items = { name: string; };
-
-type UserState = {
+type PlaythroughState = {
   hp: number;
   gold: number;
-  items: Items[];
+  backpack: [Item];
 }
 
-type UserActions = {
+type PlaythroughActions = {
   setHp: (newHp: number) => void;
   addHp: (hpToAdd: number) => void;
   setGold: (newGold: number) => void;
   addGold: (goldToAdd: number) => void;
+  addItem: (newItem: Item) => void;
   reset: () => void;
 }
 
-const initialState: UserState = {
+const initialState: PlaythroughState = {
   hp: 100,
   gold: 50,
-  items: [{name: 'Fists'}], 
+  backpack: [{
+    _id: 1,
+    type: 'initial',
+    name: 'Fists',
+    description: ''
+  }], 
 };
 
-const usePlaythroughStore = create<UserState & UserActions>()(
+const usePlaythroughStore = create<PlaythroughState & PlaythroughActions>()(
   persist((set) => ( // Persiste em todas as paginas, faz o cache na localstorage, penso eu :D
   {
     ...initialState,
@@ -32,6 +37,7 @@ const usePlaythroughStore = create<UserState & UserActions>()(
     addHp: (hpToAdd: number) => set((state) => ({ hp: state.hp + hpToAdd })),
     setGold: (newGold: number) => set({ hp: newGold }),
     addGold: (goldToAdd: number) => set((state) => ({ gold: state.gold + goldToAdd })),
+    addItem: (newItem: Item) => set((state) => ({ backpack: {...state.backpack, newItem }})),
     reset: () => {set(initialState)}
   }), {
     name: 'playthrough-info',

@@ -4,10 +4,22 @@ import usePlaythroughStore from '../stores/usePlaythroughStore';
 import useUserStore from '../stores/useUserStore';
 import { randomIntFromInterval } from '../utils/utils';
 import { advancedPrompts1 } from '../__fixtures__/fixtures';
+import { items } from '../__fixtures__/itemsFixtures';
 import { isUndefined } from 'lodash';
 import { Scene } from '../__fixtures__/fixtures';
+import { useSnackbar } from 'notistack';
 
 
+type EnqueueProps = {
+  textToShow: string;
+  style: {
+    backgroundColor?: string;
+    color?: string;
+    border?: string;
+    minWidth?: string;
+    width?: string;
+  };
+}
 
 const useGetNextPrompt = () => {
 
@@ -18,12 +30,13 @@ const useGetNextPrompt = () => {
     hpChange: 0,
     goldChange: 0,
     text: "Take a step...",
-    nextScene: [],
+    nextScene: []
 });
 
-  const { hp, addHp, addGold, reset: resetPlaythrough } = usePlaythroughStore();
+  const { hp, addHp, addGold, reset: resetPlaythrough, addItem} = usePlaythroughStore();
   const { addSteps, steps, reset: resetAdventure } = useAdventureStore();
   const { addtotalSteps, addtotalPlaythrough } = useUserStore();
+  const { enqueueSnackbar } = useSnackbar();
 
 
   useEffect(() => {
@@ -31,9 +44,9 @@ const useGetNextPrompt = () => {
   }, [])
 
   const getInitialPrompt = () => {
-    // TODO: fazer a logica aqui e usar um useMountEffect para chamar esta função
+  // TODO: fazer a logica aqui e usar um useMountEffect para chamar esta função
 
-    // doBuffEffects = Retorna funcao de efeito de buffed. 
+  // doBuffEffects = Retorna funcao de efeito de buffed. 
   const initialPrompts = advancedPrompts1.filter((prompt) => (prompt.type === 'initial'));
   
   // Este é o método normal de geração aleatória.
@@ -59,7 +72,13 @@ const useGetNextPrompt = () => {
       addtotalSteps(steps);
       resetAdventure();
       resetPlaythrough();
+      
     }
+  }
+
+  const sendNotification = ({ textToShow, style}: EnqueueProps) => {
+    enqueueSnackbar(`${textToShow}!`, { autoHideDuration: 1500, 
+      style });
   }
 
   const getNextPrompt = () => {
@@ -72,11 +91,21 @@ const useGetNextPrompt = () => {
     addSteps(1);
     addHp(prompt.hpChange);
     addGold(prompt.goldChange);
+    sendNotification({ textToShow:`${prompt.goldChange} gold changed`, style: { backgroundColor: 'gold', color: 'black', border: '1px solid black', minWidth: '135px', width: '135px'  }});
 
-    PlayerDeathCheck();
+    sendNotification({textToShow:`${prompt.hpChange} hp changed`, style: { backgroundColor: 'red', color: 'white',  border: '1px solid black', minWidth: '135px', width: '135px' }});
+    if(!isUndefined(prompt.itemIds)) 
+      {
+        prompt.itemIds.forEach(( itemId ) => { 
+          addItem(items[itemId - 1]); 
+          sendNotification({textToShow: "item added", style: { backgroundColor: 'gray', color: 'white',  border: '1px solid black', minWidth: '135px', width: '135px' }});
+        });
+    }
     
+    PlayerDeathCheck();   
   };
   
+
   const getPromptById = (id: number) => {
    
     const newPrompt = advancedPrompts1.find((scene) => scene._id === id);
@@ -87,6 +116,16 @@ const useGetNextPrompt = () => {
       addHp(newPrompt.hpChange);
       addGold(newPrompt.goldChange);
       setPrompt(newPrompt);
+      sendNotification({textToShow:`${prompt.goldChange} gold changed`, style: { backgroundColor: 'gold', color: 'black', border: '1px solid black', minWidth: '135px', width: '135px'  }});
+      sendNotification({textToShow:`${prompt.hpChange} hp changed`, style: { backgroundColor: 'red', color: 'white',  border: '1px solid black', minWidth: '135px', width: '135px' }});
+
+      if(!isUndefined(newPrompt.itemIds)) 
+      {
+        newPrompt.itemIds.forEach(( itemId ) => { 
+          addItem(items[itemId - 1]); 
+          sendNotification({textToShow: "item added", style: { backgroundColor: 'gray', color: 'white',  border: '1px solid black', minWidth: '135px', width: '135px' }});
+        });
+    }
     }
     else randomizeInitialPrompt();
   }
