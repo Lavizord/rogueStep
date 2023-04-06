@@ -18,9 +18,7 @@ const SceneChoice:React.FC<Props> = ({ nextScene, getPromptById } : Props) => {
         width: "100%"
     }}>
       {nextScene.map((choice) => {
-        console.log(choice);
         if(isUndefined(choice.nextSceneId)) return <></>;
-        console.log('passou')
         return <ChoiceCard key={choice.nextSceneId} choice={choice} getPromptById={getPromptById}/>;
         })}
     </Box>

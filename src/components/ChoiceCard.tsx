@@ -46,7 +46,12 @@ const ChoiceCard:React.FC<Props> = ({ choice, getPromptById } : Props) => {
     
     return (
       <Box sx={{ maxWidth: 275 }}>
-        <Card variant="outlined">
+        <Card variant="outlined" sx={{ 
+          minHeight: '125px',
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+    }}>
           {
           card(
             {
