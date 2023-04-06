@@ -65,8 +65,6 @@ const useGetNextPrompt = () => {
   const getNextPrompt = () => {
     // Para já não existe necessidade de filtrar. Fica isto aqui como exemplo.
     // const filter = advancedPrompts1.filter((a) => a.hpChange === 5);
-    // console.log(filter);
-    // console.log(filter[randomIntFromInterval(0, filter.length)]);
     /* const rndmInterval = randomIntFromInterval(0, advancedPrompts1.length);
     const newPrompt = advancedPrompts1[rndmInterval]; */
 
@@ -85,7 +83,6 @@ const useGetNextPrompt = () => {
 
     if(!isUndefined(newPrompt))
     {
-      console.log(newPrompt._id);
       addSteps(1);
       addHp(newPrompt.hpChange);
       addGold(newPrompt.goldChange);

@@ -10,6 +10,8 @@ import useAdventureStore from '../stores/useAdventureStore';
 import TextArea from './TextArea';
 import Header from './Header';
 import SceneChoice from './SceneChoice';
+import Notifications from './Notifications';
+import { useEffect, useState } from 'react';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -28,20 +30,28 @@ const BasicStack:React.FC = () => {
       prompt
     } = useGetNextPrompt();
 
+    const [isNotificationOpen, setIsNotificationOpen] = useState(false);
     const { gold, hp, items } = usePlaythroughStore();
     const { steps } = useAdventureStore();
  
     const { text, goldChange, hpChange, nextScene } = prompt;
 
-    //console.log(gold, hp, items, steps);
+    console.log(goldChange, hpChange);
+
+    const toggleNotification = () => {
+      setIsNotificationOpen(!isNotificationOpen);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => {toggleNotification()},[goldChange, hpChange]);
 
     return (
       <>
-      <Box sx={{ width: '100%' }}>
+      <Box sx={{ width: '100%', height:'100%' }}>
         <Header gold={gold} hp={hp} />
-        <Stack spacing={2}>
-          <Item>
-            <TextArea text={text}/>
+        <Stack spacing={2} height={'100%'} flexDirection="column" alignItems="center">
+          <Item sx={{maxWidth: '467px', height: '100px'}}>
+            <TextArea text={text} />
           </Item>
           <Stack 
             direction="row"
@@ -61,6 +71,9 @@ const BasicStack:React.FC = () => {
             <Button variant="contained" onClick={() => getNextPrompt()}>Take a Step...</Button>
           </Item>
         </Stack>
+        <Notifications 
+          notificationText={goldChange.toString()+" gold Change!"} 
+          openNotification={isNotificationOpen} />
       </Box>
     </>
   );
