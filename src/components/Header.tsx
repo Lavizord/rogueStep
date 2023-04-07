@@ -24,12 +24,12 @@ const Header:React.FC<Props> = ({ hp, gold }) => {
   }), [hp]) 
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} data-testid="app-bar-test-id">
       <AppBar position="static" sx={{ backgroundColor: "#333333" }}>
         <Toolbar sx={{flexDirection: "row", justifyContent: "space-between"}}>
         <Stack direction="row" spacing={1}>
-          <Chip {...goldChip} />
-          <Chip {...hpChip} />
+          <Chip {...goldChip} data-testid="gold-chip-test-id"/>
+          <Chip {...hpChip} data-testid="hp-chip-test-id"/>
         </Stack>
         </Toolbar>
       </AppBar>
