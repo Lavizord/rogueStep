@@ -1,5 +1,3 @@
-import { number } from "yargs";
-
 export interface Stats {
     atackMod?: number;
     damageRoll: number;
