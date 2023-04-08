@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import useAdventureStore from '../stores/useAdventureStore';
-import usePlaythroughStore from '../stores/usePlaythroughStore';
-import useUserStore from '../stores/useUserStore';
-import { randomIntFromInterval } from '../utils/utils';
-import { scenes } from '../__fixtures__/fixtures';
-import { items } from '../__fixtures__/itemsFixtures';
+import useAdventureStore from '../../stores/useAdventureStore';
+import useUserStore from '../../stores/useUserStore';
+import { randomIntFromInterval } from '../../utils/utils';
+import { scenes } from '../../__fixtures__/fixtures';
+import { Item, items } from '../../__fixtures__/itemsFixtures';
 import { isUndefined } from 'lodash';
-import { Scene } from '../__fixtures__/fixtures';
+import { Scene } from '../../__fixtures__/fixtures';
 import { useSnackbar } from 'notistack';
 
 
@@ -21,7 +20,15 @@ type EnqueueProps = {
   };
 }
 
-const useScene = () => {
+type Props ={
+  hp: number;
+  addHp:(hpToAdd: number) => void;
+  addGold: (goldToAdd: number) => void;
+  resetPlaythrough: () => void; 
+  addItem: (newItem: Item) => void; 
+}
+
+const useScene = ({ hp, addHp, addGold, resetPlaythrough, addItem } : Props) => {
 
   const [scene, setScene] = useState<Scene>({
     _id: 999,
@@ -33,7 +40,6 @@ const useScene = () => {
     nextScene: []
 });
 
-  const { hp, addHp, addGold, reset: resetPlaythrough, addItem} = usePlaythroughStore();
   const { addSteps, steps, reset: resetAdventure } = useAdventureStore();
   const { addtotalSteps, addtotalPlaythrough } = useUserStore();
   const { enqueueSnackbar } = useSnackbar();

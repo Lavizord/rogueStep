@@ -3,12 +3,12 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
-import useScene from '../hooks/useScene';
-import usePlaythroughStore from '../stores/usePlaythroughStore';
+import useScene from '../../hooks/useScene/useScene';
+import usePlaythroughStore from '../../stores/usePlaythroughStore';
 // import useAdventureStore from '../stores/useAdventureStore';
-import SceneText from './SceneText';
-import Header from './Header';
-import SceneChoice from './SceneChoice';
+import SceneText from '../SceneText/SceneText';
+import Header from '../Header/Header';
+import SceneChoice from '../SceneChoice/SceneChoice';
 import { isUndefined } from 'lodash';
 
 
@@ -20,15 +20,16 @@ const Item = styled(Paper)(({ theme}) => ({
   color: theme.palette.text.secondary,
 }));
 
-const BasicStack:React.FC = () => {
+const Main:React.FC = () => {
   
+  const { hp, gold, addHp, addGold, reset: resetPlaythrough, addItem} = usePlaythroughStore();
+
   const {
     advanceStory,
     getSceneById,
     scene
-  } = useScene();
-
-  const { gold, hp } = usePlaythroughStore();
+  } = useScene({ hp, addHp, addGold, resetPlaythrough, addItem });
+  
   // const { steps } = useAdventureStore();
 
   const { text, nextScene } = scene;
@@ -52,4 +53,4 @@ const BasicStack:React.FC = () => {
   );
 }
 
-export default BasicStack;
+export default Main;

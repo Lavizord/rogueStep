@@ -4,7 +4,7 @@ type Props = {
   text?: string;
 }
 
-const SceneText = ( { text = 'Take a step...' } : Props ) => {
+const SceneText:React.FC<Props> = ( { text = 'Take a step...' } : Props ) => {
 
   return (
     <Typography variant="body1" gutterBottom>
