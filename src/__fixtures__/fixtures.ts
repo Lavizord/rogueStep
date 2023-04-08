@@ -1,6 +1,7 @@
 export interface NextScene {
     nextSceneId?: number;
     choiceText?: string;
+    itemIds?: number[];
 }
 export interface Scene {
     _id: number;
@@ -143,7 +144,8 @@ export const scenes: Scene[] = [
     nextScene: [
         {
             nextSceneId: 12,
-            choiceText: "Buy something from the merchant."
+            choiceText: "Buy something from the merchant.",
+            itemIds: [3]
         },
         {
             nextSceneId: 13,

@@ -19,7 +19,11 @@ const SceneChoice:React.FC<Props> = ({ nextScene, getSceneById } : Props) => {
     }}>
       {nextScene.map((choice) => {
         if(isUndefined(choice.nextSceneId)) return <></>;
-        return <ChoiceCard key={choice.nextSceneId} choice={choice} getSceneById={getSceneById}/>;
+        return <ChoiceCard 
+                  key={choice.nextSceneId} 
+                  choice={choice} 
+                  getSceneById={getSceneById}
+                />;
         })}
     </Box>
   )

@@ -17,14 +17,20 @@ type PlaythroughActions = {
   reset: () => void;
 }
 
+// TODO: Iniciar esta backpack com um 'catálogo de items'
+//       assim fica mais fácil alterar / configurar os starting items
+//       Nota: Algumas histórias podem altera os starting Items? Pensar.
 const initialState: PlaythroughState = {
   hp: 100,
   gold: 50,
   backpack: [{
     _id: 1,
-    type: 'initial',
+    stackable: false,
+    unique: true,
+    quantity: 1,
+    type: ['initial', 'weapon'],
     name: 'Fists',
-    description: ''
+    description: 'My bare fists. Im sure they will come in handy.',
   }], 
 };
 
