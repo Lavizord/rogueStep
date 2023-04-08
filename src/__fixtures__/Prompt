@@ -1,0 +1,6 @@
+
+
+I want you to write me a simple story consisting of diferent scenes. Each scene should have 1 or more Choices, with the exception of the final scene, which should never have chices.
+The story should have simple scenes, and should reference the reader in the first person, like 'you fall down'.
+Each scene should be acompained by an ID, a number that starts at 1 and increments every scene.
+Each scene needs a text for the story, and text for the possible choices. Acompaning the choices there should also be a next scene ID so that we can navigate the story, choosing our own 'path'.
