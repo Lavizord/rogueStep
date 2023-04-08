@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
-import ChoiceCard from "./ChoiceCard";
+import ChoiceCard from "../ChoiceCard/ChoiceCard";
 import { isUndefined } from "lodash";
-import { NextScene } from '../__fixtures__/fixtures';
+import { NextScene } from '../../__fixtures__/fixtures';
 
 type Props = {
   nextScene: NextScene[];
@@ -19,11 +19,7 @@ const SceneChoice:React.FC<Props> = ({ nextScene, getSceneById } : Props) => {
     }}>
       {nextScene.map((choice) => {
         if(isUndefined(choice.nextSceneId)) return <></>;
-        return <ChoiceCard 
-                  key={choice.nextSceneId} 
-                  choice={choice} 
-                  getSceneById={getSceneById}
-                />;
+        return <ChoiceCard key={choice.nextSceneId} choice={choice} getSceneById={getSceneById}/>;
         })}
     </Box>
   )
