@@ -10,6 +10,7 @@ import SceneText from '../SceneText/SceneText';
 import Header from '../Header/Header';
 import SceneChoice from '../SceneChoice/SceneChoice';
 import { isUndefined } from 'lodash';
+import useBackpack from '../../hooks/useBackpack/useBackpack';
 
 
 const Item = styled(Paper)(({ theme}) => ({
@@ -23,12 +24,13 @@ const Item = styled(Paper)(({ theme}) => ({
 const Main:React.FC = () => {
   
   const { hp, gold, addHp, addGold, reset: resetPlaythrough, addItem} = usePlaythroughStore();
+  const {handleAddBackpackByIds}  = useBackpack();
 
   const {
-    advanceStory,
-    getSceneById,
+    startNewStory,
+    handleChoice,
     scene
-  } = useScene({ hp, addHp, addGold, resetPlaythrough, addItem });
+  } = useScene({ hp, addHp, addGold, resetPlaythrough, addItem, handleAddBackpackByIds });
   
   // const { steps } = useAdventureStore();
 
@@ -42,10 +44,10 @@ const Main:React.FC = () => {
         <Item sx={{maxWidth: '467px', height: '100px'}}>
           <SceneText text={text} />
         </Item>
-          <SceneChoice nextScene={nextScene} getSceneById={getSceneById} />                    
+          <SceneChoice nextScene={nextScene} handleChoice={handleChoice} />                    
           { 
             !isUndefined(nextScene[0]) ? <></> : 
-            <Button variant="contained" onClick={() => advanceStory()}>Take a Step...</Button>
+            <Button variant="contained" onClick={() => startNewStory()}>Take a Step...</Button>
           }
       </Stack>
       </Box>

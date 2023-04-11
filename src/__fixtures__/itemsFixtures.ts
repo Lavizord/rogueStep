@@ -13,6 +13,7 @@ export interface Item {
     type: string[];
     stats?: Stats;
 }
+// TODO: Max Stackable? Next branch -> Yes.
 export const items: Item[] = [
     {
         _id: 1,
@@ -26,7 +27,7 @@ export const items: Item[] = [
     {
         _id: 2,
         stackable: false,
-        unique: false,
+        unique: true,
         quantity: 1,
         name: 'Raft',
         description: 'Built by natives to help me escape a island.',
