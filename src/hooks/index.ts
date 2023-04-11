@@ -1,3 +1,4 @@
 import useScene from "./useScene/useScene";
+import useNotification from "./useNotification/useNotification";
 
-export { useScene };
+export { useScene, useNotification };
