@@ -1,32 +1,37 @@
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { NextScene } from '../../__fixtures__/fixtures';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import { NextScene } from "../../__fixtures__/fixtures";
 
 type CardProps = {
   cardText: string;
   cardId: number;
   choice: NextScene;
   handleChoice: (choice: NextScene) => void;
-}
+};
 
-const card = ({ cardText, cardId, choice, handleChoice } : CardProps) => 
+const card = ({ cardText, cardId, choice, handleChoice }: CardProps) => (
   <>
     <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+      <Typography
+        sx={{ fontSize: 14 }}
+        color="text.secondary"
+        textAlign="center"
+      >
         {cardText}
       </Typography>
     </CardContent>
     <CardActions>
-      <Button 
+      <Button
+        fullWidth
         variant="contained"
         size="small"
         color="primary"
         style={{
-          fontSize: "12px"
+          fontSize: "12px",
         }}
         onClick={() => handleChoice(choice)}
       >
@@ -34,35 +39,34 @@ const card = ({ cardText, cardId, choice, handleChoice } : CardProps) =>
       </Button>
     </CardActions>
   </>
-;
-
+);
 type Props = {
   choice: NextScene;
   handleChoice: (choice: NextScene) => void;
-}
+};
 
-const ChoiceCard:React.FC<Props> = ({ choice, handleChoice } : Props) => {
-    
-    return (
-      <Box sx={{ maxWidth: 275 }}>
-        <Card variant="outlined" sx={{ 
-          minHeight: '125px',
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-    }}>
-          {
-          card(
-            {
-              cardText: choice.choiceText as string, 
-              cardId: choice.nextSceneId as number, 
-              choice: choice as NextScene,
-              handleChoice: handleChoice
-            }
-          )}
-        </Card>
-      </Box>
-    );
-  }
-  
+// TODO: refactor of card text and card ID
+const ChoiceCard: React.FC<Props> = ({ choice, handleChoice }: Props) => {
+  return (
+    <Card
+      variant="outlined"
+      sx={{
+        minHeight: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        flexGrow: 1,
+        flexBasis: 0,
+      }}
+    >
+      {card({
+        cardText: choice.choiceText as string,
+        cardId: choice.nextSceneId as number,
+        choice: choice,
+        handleChoice: handleChoice,
+      })}
+    </Card>
+  );
+};
+
 export default ChoiceCard;
