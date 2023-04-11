@@ -102,6 +102,7 @@ const useScene = () => {
     if (!isUndefined(newScene)) {
       handleAdvance(newScene);
     } else setScene(getRandomInitialScene());
+    PlayerDeathCheck();
   };
 
   const handleChoice = (choice: NextScene) => {
