@@ -24,6 +24,7 @@ const useNotification = () => {
   const sendNotification = ({ textToShow, style }: EnqueueProps) => {
     enqueueSnackbar(`${textToShow}`, {
       autoHideDuration: 1500,
+      anchorOrigin: { vertical: "bottom", horizontal: "left" },
       style: {
         ...baseStyle,
         ...style,

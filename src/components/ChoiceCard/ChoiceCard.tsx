@@ -26,6 +26,7 @@ const card = ({ cardText, cardId, choice, handleChoice }: CardProps) => (
     </CardContent>
     <CardActions>
       <Button
+        fullWidth
         variant="contained"
         size="small"
         color="primary"
@@ -47,24 +48,24 @@ type Props = {
 // TODO: refactor of card text and card ID
 const ChoiceCard: React.FC<Props> = ({ choice, handleChoice }: Props) => {
   return (
-    <Box sx={{ maxWidth: "50%" }}>
-      <Card
-        variant="outlined"
-        sx={{
-          minHeight: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-        }}
-      >
-        {card({
-          cardText: choice.choiceText as string,
-          cardId: choice.nextSceneId as number,
-          choice: choice,
-          handleChoice: handleChoice,
-        })}
-      </Card>
-    </Box>
+    <Card
+      variant="outlined"
+      sx={{
+        minHeight: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        flexGrow: 1,
+        flexBasis: 0,
+      }}
+    >
+      {card({
+        cardText: choice.choiceText as string,
+        cardId: choice.nextSceneId as number,
+        choice: choice,
+        handleChoice: handleChoice,
+      })}
+    </Card>
   );
 };
 

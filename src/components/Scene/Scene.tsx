@@ -34,11 +34,11 @@ const Scene: React.FC<Props> = ({
     >
       <Item
         sx={{
-          maxWidth: "467px",
           height: "100px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          maxWidth: "467px",
         }}
       >
         <SceneText text={sceneText} />

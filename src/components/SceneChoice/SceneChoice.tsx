@@ -11,11 +11,11 @@ type Props = {
 const SceneChoice: React.FC<Props> = ({ nextScenes, handleChoice }: Props) => {
   return (
     <Box
-      gap={4}
+      gap={2}
       sx={{
         display: "flex",
         flexDirection: "row",
-        justifyContent: "center",
+        alignItems: "stretch",
         width: "100%",
       }}
     >
