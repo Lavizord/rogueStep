@@ -34,7 +34,7 @@ const Main: React.FC = () => {
         <Scene
           sceneText={text}
           nextScenes={nextScene}
-          advanceStoryWithId={handleChoice}
+          handleChoice={handleChoice}
         />
         {isEmpty(nextScene) && (
           <Button

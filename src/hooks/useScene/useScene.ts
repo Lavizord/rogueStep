@@ -61,14 +61,14 @@ const useScene = () => {
     addGold(sceneToAdvance.goldChange);
     setScene(sceneToAdvance);
     sendNotification({
-      textToShow: `${scene.goldChange} gold changed!`,
+      textToShow: `${sceneToAdvance.goldChange} gold changed!`,
       style: {
         backgroundColor: "gold",
         color: "black",
       },
     });
     sendNotification({
-      textToShow: `${scene.hpChange} hp changed!`,
+      textToShow: `${sceneToAdvance.hpChange} hp changed!`,
       style: {
         backgroundColor: "red",
         color: "white",
@@ -116,7 +116,6 @@ const useScene = () => {
 
   return {
     startNewStory,
-    advanceStoryWithId,
     handleChoice,
     scene,
   };
