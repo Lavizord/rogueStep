@@ -9,10 +9,11 @@ import { NextScene } from '../../__fixtures__/fixtures';
 type CardProps = {
   cardText: string;
   cardId: number;
-  getSceneById: (id: number) => void;
+  choice: NextScene;
+  handleChoice: (choice: NextScene) => void;
 }
 
-const card = ({ cardText, cardId, getSceneById } : CardProps) => 
+const card = ({ cardText, cardId, choice, handleChoice } : CardProps) => 
   <>
     <CardContent>
       <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -27,7 +28,7 @@ const card = ({ cardText, cardId, getSceneById } : CardProps) =>
         style={{
           fontSize: "12px"
         }}
-        onClick={() => getSceneById(cardId)}
+        onClick={() => handleChoice(choice)}
       >
         Take a step in this direction... {cardId}
       </Button>
@@ -37,10 +38,10 @@ const card = ({ cardText, cardId, getSceneById } : CardProps) =>
 
 type Props = {
   choice: NextScene;
-  getSceneById: (id: number) => void;
+  handleChoice: (choice: NextScene) => void;
 }
 
-const ChoiceCard:React.FC<Props> = ({ choice, getSceneById } : Props) => {
+const ChoiceCard:React.FC<Props> = ({ choice, handleChoice } : Props) => {
     
     return (
       <Box sx={{ maxWidth: 275 }}>
@@ -55,7 +56,8 @@ const ChoiceCard:React.FC<Props> = ({ choice, getSceneById } : Props) => {
             {
               cardText: choice.choiceText as string, 
               cardId: choice.nextSceneId as number, 
-              getSceneById: getSceneById
+              choice: choice as NextScene,
+              handleChoice: handleChoice
             }
           )}
         </Card>
