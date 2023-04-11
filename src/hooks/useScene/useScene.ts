@@ -88,9 +88,7 @@ const useScene = () => {
       });
     }
   };
-  // Move a cena para uma com o tipo inicial.
-  // TODO: Implementar sistema onde a história inicial não se repete, guardando os storyIds e excluido os mesmos ao
-  //       iniciar uma nova história.
+
   const startNewStory = () => {
     handleAdvance(getRandomInitialScene());
     PlayerDeathCheck();

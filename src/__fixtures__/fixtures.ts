@@ -30,6 +30,10 @@ export const scenes: Scene[] = [
         {
             nextSceneId: 3,
             choiceText: "Stay put and wait for rescue."
+        },
+        {
+            nextSceneId: 3,
+            choiceText: "Stay put and wait for rescue."
         }
     ]
 },
