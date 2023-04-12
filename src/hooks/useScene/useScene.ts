@@ -3,7 +3,6 @@ import useAdventureStore from "../../stores/useAdventureStore";
 import useUserStore from "../../stores/useUserStore";
 import { randomIntFromInterval } from "../../utils/utils";
 import { NextScene, scenes } from "../../__fixtures__/fixtures";
-import { items } from "../../__fixtures__/itemsFixtures";
 import { isUndefined } from "lodash";
 import { Scene } from "../../__fixtures__/fixtures";
 import usePlaythroughStore from "../../stores/usePlaythroughStore";
@@ -54,21 +53,24 @@ const useScene = () => {
     addHp(sceneToAdvance.hpChange);
     addGold(sceneToAdvance.goldChange);
     setScene(sceneToAdvance);
-    sendNotification({
-      textToShow: `${sceneToAdvance.goldChange} gold changed!`,
-      style: {
-        backgroundColor: "gold",
-        color: "black",
-      },
-    });
-    sendNotification({
-      textToShow: `${sceneToAdvance.hpChange} hp changed!`,
-      style: {
-        backgroundColor: "red",
-        color: "white",
-      },
-    });
-
+    if (sceneToAdvance.goldChange !== 0) {
+      sendNotification({
+        textToShow: `${sceneToAdvance.goldChange} gold changed!`,
+        style: {
+          backgroundColor: "gold",
+          color: "black",
+        },
+      });
+    }
+    if (sceneToAdvance.hpChange !== 0) {
+      sendNotification({
+        textToShow: `${sceneToAdvance.hpChange} hp changed!`,
+        style: {
+          backgroundColor: "red",
+          color: "white",
+        },
+      });
+    }
     if (!isUndefined(sceneToAdvance.itemIds)) {
       handleAddBackpackByIds(sceneToAdvance.itemIds);
       sceneToAdvance.itemIds.forEach((itemId) => {

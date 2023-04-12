@@ -6,6 +6,7 @@ import usePlaythroughStore from "../../stores/usePlaythroughStore";
 import Header from "../Header/Header";
 import { isEmpty } from "lodash";
 import Scene from "../Scene/Scene";
+import useAdventureStore from "../../stores/useAdventureStore";
 
 const boxStyle = {
   width: "100%",
@@ -23,14 +24,15 @@ const Main: React.FC = () => {
 
   const { startNewStory, handleChoice, scene } = useScene();
 
-  // const { steps } = useAdventureStore();
+  const { steps } = useAdventureStore();
 
   const { text, nextScene } = scene;
 
+  console.log(nextScene);
   return (
     <>
       <Box sx={boxStyle}>
-        <Header gold={gold} hp={hp} />
+        <Header gold={gold} hp={hp} steps={steps} />
         <Scene
           sceneText={text}
           nextScenes={nextScene}

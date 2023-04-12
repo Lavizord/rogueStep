@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import ChoiceCard from "../ChoiceCard/ChoiceCard";
 import { isUndefined } from "lodash";
 import { NextScene } from "../../__fixtures__/fixtures";
+import { v4 as uuidv4 } from "uuid";
 
 type Props = {
   nextScenes: NextScene[];
@@ -23,7 +24,7 @@ const SceneChoice: React.FC<Props> = ({ nextScenes, handleChoice }: Props) => {
         if (isUndefined(choice.nextSceneId)) return <></>;
         return (
           <ChoiceCard
-            key={choice.nextSceneId}
+            key={`Card-#${choice.nextSceneId}-${uuidv4()}`}
             choice={choice}
             handleChoice={handleChoice}
           />
