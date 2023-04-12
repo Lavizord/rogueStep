@@ -42,7 +42,6 @@ type Props = {
   handleChoice: (choice: NextScene) => void;
 };
 
-// TODO: refactor of card text and card ID
 const ChoiceCard: React.FC<Props> = ({ choice, handleChoice }: Props) => {
   return (
     <Card

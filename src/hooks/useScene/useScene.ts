@@ -10,7 +10,15 @@ import useNotification from "../useNotification/useNotification";
 import useBackpack from "../useBackpack/useBackpack";
 
 const useScene = () => {
-  const { hp, addHp, addGold, reset: resetPlaythrough } = usePlaythroughStore();
+  const {
+    hp,
+    addHp,
+    addGold,
+    addCompletedStory,
+
+    completedStoryIds,
+    reset: resetPlaythrough,
+  } = usePlaythroughStore();
 
   const [scene, setScene] = useState<Scene>({
     _id: 999,
@@ -34,8 +42,12 @@ const useScene = () => {
 
   const getRandomInitialScene = () => {
     const initialScenes = scenes.filter((scene) => scene.type === "initial");
-
-    return initialScenes[randomIntFromInterval(0, initialScenes.length)];
+    const nonRepeatingInitialScenes = initialScenes.filter(
+      (scene) => !completedStoryIds.includes(scene.storyId)
+    );
+    return nonRepeatingInitialScenes[
+      randomIntFromInterval(0, nonRepeatingInitialScenes.length)
+    ];
   };
 
   const PlayerDeathCheck = () => {
@@ -86,6 +98,8 @@ const useScene = () => {
   };
 
   const startNewStory = () => {
+    console.log("Story completed: " + scene.storyId.toString());
+    addCompletedStory(scene.storyId);
     handleAdvance(getRandomInitialScene());
     PlayerDeathCheck();
   };
