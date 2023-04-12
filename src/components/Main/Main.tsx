@@ -27,6 +27,7 @@ const Main: React.FC = () => {
 
   const { text, nextScene } = scene;
 
+  console.log(nextScene);
   return (
     <>
       <Box sx={boxStyle}>
