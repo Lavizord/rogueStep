@@ -11,13 +11,7 @@ import useNotification from "../useNotification/useNotification";
 import useBackpack from "../useBackpack/useBackpack";
 
 const useScene = () => {
-  const {
-    hp,
-    addHp,
-    addGold,
-    reset: resetPlaythrough,
-    addItem,
-  } = usePlaythroughStore();
+  const { hp, addHp, addGold, reset: resetPlaythrough } = usePlaythroughStore();
 
   const [scene, setScene] = useState<Scene>({
     _id: 999,
@@ -76,8 +70,8 @@ const useScene = () => {
     });
 
     if (!isUndefined(sceneToAdvance.itemIds)) {
+      handleAddBackpackByIds(sceneToAdvance.itemIds);
       sceneToAdvance.itemIds.forEach((itemId) => {
-        addItem(items[itemId - 1]);
         sendNotification({
           textToShow: "item added!",
           style: {

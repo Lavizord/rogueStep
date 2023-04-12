@@ -7,13 +7,11 @@ import Typography from "@mui/material/Typography";
 import { NextScene } from "../../__fixtures__/fixtures";
 
 type CardProps = {
-  cardText: string;
-  cardId: number;
   choice: NextScene;
   handleChoice: (choice: NextScene) => void;
 };
 
-const card = ({ cardText, cardId, choice, handleChoice }: CardProps) => (
+const card = ({ choice, handleChoice }: CardProps) => (
   <>
     <CardContent>
       <Typography
@@ -21,7 +19,7 @@ const card = ({ cardText, cardId, choice, handleChoice }: CardProps) => (
         color="text.secondary"
         textAlign="center"
       >
-        {cardText}
+        {choice.choiceText}
       </Typography>
     </CardContent>
     <CardActions>
@@ -35,7 +33,7 @@ const card = ({ cardText, cardId, choice, handleChoice }: CardProps) => (
         }}
         onClick={() => handleChoice(choice)}
       >
-        Take a step in this direction... {cardId}
+        Take a step in this direction... {choice.nextSceneId}
       </Button>
     </CardActions>
   </>
@@ -60,8 +58,6 @@ const ChoiceCard: React.FC<Props> = ({ choice, handleChoice }: Props) => {
       }}
     >
       {card({
-        cardText: choice.choiceText as string,
-        cardId: choice.nextSceneId as number,
         choice: choice,
         handleChoice: handleChoice,
       })}
