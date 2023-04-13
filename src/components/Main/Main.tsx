@@ -29,6 +29,7 @@ const Main: React.FC = () => {
 
   const { text, nextScene } = scene;
 
+  console.log(nextScene);
   return (
     <>
       <Box sx={boxStyle}>
@@ -46,6 +47,7 @@ const Main: React.FC = () => {
                 variant="contained"
                 onClick={startNewStory}
                 sx={{
+                  zIndex: "1401", //para ficar à frente das notifications
                   height: "50px",
                   borderRadius: 0,
                 }}
