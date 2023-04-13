@@ -1,7 +1,9 @@
-import SceneText from "./SceneText/SceneText";
-import SceneChoice from "./SceneChoice/SceneChoice";
-import Main from "./Main/Main";
-import Header from "./Header/Header";
+import Alert from "./Alert/Alert";
 import ChoiceCard from "./ChoiceCard/ChoiceCard";
+import Header from "./Header/Header";
+import Main from "./Main/Main";
+import Scene from "./Scene/Scene";
+import SceneChoice from "./SceneChoice/SceneChoice";
+import SceneText from "./SceneText/SceneText";
 
-export {SceneText, SceneChoice, Main, Header, ChoiceCard};
+export { Alert, ChoiceCard, Header, Main, Scene, SceneChoice, SceneText };
