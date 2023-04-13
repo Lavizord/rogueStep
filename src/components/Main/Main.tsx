@@ -7,6 +7,7 @@ import Header from "../Header/Header";
 import { isEmpty } from "lodash";
 import Scene from "../Scene/Scene";
 import useAdventureStore from "../../stores/useAdventureStore";
+import Alert from "../Alert/Alert";
 
 const boxStyle = {
   width: "100%",
@@ -33,24 +34,36 @@ const Main: React.FC = () => {
     <>
       <Box sx={boxStyle}>
         <Header gold={gold} hp={hp} steps={steps} />
-        <Scene
-          sceneText={text}
-          nextScenes={nextScene}
-          handleChoice={handleChoice}
-        />
-        {isEmpty(nextScene) && (
-          <Button
-            fullWidth
-            variant="contained"
-            onClick={startNewStory}
-            sx={{
-              zIndex: "1401", //para ficar à frente das notifications
-              height: "50px",
-              borderRadius: 0,
+        {hp > 0 ? (
+          <>
+            <Scene
+              sceneText={text}
+              nextScenes={nextScene}
+              handleChoice={handleChoice}
+            />
+            {isEmpty(nextScene) && (
+              <Button
+                fullWidth
+                variant="contained"
+                onClick={startNewStory}
+                sx={{
+                  zIndex: "1401", //para ficar à frente das notifications
+                  height: "50px",
+                  borderRadius: 0,
+                }}
+              >
+                Take a Step...
+              </Button>
+            )}
+          </>
+        ) : (
+          <Alert
+            actions={[{ actionFn: startNewStory, actionText: "New Adventure" }]}
+            content={{
+              contentText: "You can start a new adventure by clicking below.",
+              titleText: "You are dead :(",
             }}
-          >
-            Take a Step...
-          </Button>
+          />
         )}
       </Box>
     </>
