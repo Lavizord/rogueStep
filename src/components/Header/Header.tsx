@@ -3,6 +3,9 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import { Avatar, Chip, Stack } from "@mui/material";
+import Backpack from "@mui/icons-material/Backpack";
+import ArrowCircleLeft from "@mui/icons-material/ArrowCircleLeft";
+import { Link, useLocation } from "react-router-dom";
 
 type Props = {
   hp: number;
@@ -11,6 +14,8 @@ type Props = {
 };
 
 const Header: React.FC<Props> = ({ hp, gold, steps }) => {
+  let location = useLocation();
+
   const goldChip = useMemo(
     () => ({
       avatar: (
@@ -50,6 +55,24 @@ const Header: React.FC<Props> = ({ hp, gold, steps }) => {
     [steps]
   );
 
+  const renderInventory = useMemo(() => {
+    if (location.pathname === "/inventory")
+      return (
+        <Link to={"/"}>
+          <Avatar sx={{ backgroundColor: "chocolate" }}>
+            <ArrowCircleLeft />
+          </Avatar>
+        </Link>
+      );
+    return (
+      <Link to={"/inventory"}>
+        <Avatar sx={{ backgroundColor: "chocolate" }}>
+          <Backpack />
+        </Avatar>
+      </Link>
+    );
+  }, [location]);
+
   return (
     <Box sx={{ flexGrow: 1 }} data-testid="app-bar-test-id">
       <AppBar position="static" sx={{ backgroundColor: "#333333" }}>
@@ -59,6 +82,7 @@ const Header: React.FC<Props> = ({ hp, gold, steps }) => {
             <Chip {...hpChip} data-testid="hp-chip-test-id" />
             <Chip {...stepsChip} data-testid="steps-chip-test-id" />
           </Stack>
+          {renderInventory}
         </Toolbar>
       </AppBar>
     </Box>
