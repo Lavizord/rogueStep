@@ -40,7 +40,11 @@ const useScene = () => {
   useEffect(() => {
     setScene(getRandomInitialScene());
   }, []);
-  // TODO: iTS FUCKED
+
+  /* 
+    Temos que usar o useEffect quando a nossa scena muda, em vez de a abordagem que estavamos a ter
+    O que significa que vamos necessitar de dar load dos nossos dados usando uma API.
+  */
   useEffect(() => {
     console.log(
       "ARRAY DE HISTÓRIAS COMPLETAS (Inside hOOK): " + completedStoryIds
@@ -51,17 +55,13 @@ const useScene = () => {
 
   const getRandomInitialScene = () => {
     const initialScenes = scenes.filter((scene) => scene.type === "initial");
-    /* if (initialScenes.length == completedStoryIds.length) {
+    if (initialScenes.length == completedStoryIds.length) {
       resetCompletedStories();
       console.log("All STORIES HAVE BEEN HAD");
-    } */
-    console.log("GET RND INITIAL SCENE");
-    console.log(initialScenes);
-    console.log(completedStoryIds);
+    }
     const nonRepeatingInitialScenes = initialScenes.filter(
       (scene) => !completedStoryIds.includes(scene.storyId)
     );
-    console.log(nonRepeatingInitialScenes);
 
     return nonRepeatingInitialScenes[
       randomIntFromInterval(0, nonRepeatingInitialScenes.length)
