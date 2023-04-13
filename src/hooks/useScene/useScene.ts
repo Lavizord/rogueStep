@@ -8,6 +8,7 @@ import { Scene } from "../../__fixtures__/fixtures";
 import usePlaythroughStore from "../../stores/usePlaythroughStore";
 import useNotification from "../useNotification/useNotification";
 import useBackpack from "../useBackpack/useBackpack";
+import { Console } from "console";
 
 const useScene = () => {
   const {
@@ -15,7 +16,7 @@ const useScene = () => {
     addHp,
     addGold,
     addCompletedStory,
-
+    resetCompletedStories,
     completedStoryIds,
     reset: resetPlaythrough,
   } = usePlaythroughStore();
@@ -39,12 +40,29 @@ const useScene = () => {
   useEffect(() => {
     setScene(getRandomInitialScene());
   }, []);
+  // TODO: iTS FUCKED
+  useEffect(() => {
+    console.log(
+      "ARRAY DE HISTÓRIAS COMPLETAS (Inside hOOK): " + completedStoryIds
+    );
+    handleAdvance(getRandomInitialScene());
+    PlayerDeathCheck();
+  }, [completedStoryIds]);
 
   const getRandomInitialScene = () => {
     const initialScenes = scenes.filter((scene) => scene.type === "initial");
+    /* if (initialScenes.length == completedStoryIds.length) {
+      resetCompletedStories();
+      console.log("All STORIES HAVE BEEN HAD");
+    } */
+    console.log("GET RND INITIAL SCENE");
+    console.log(initialScenes);
+    console.log(completedStoryIds);
     const nonRepeatingInitialScenes = initialScenes.filter(
       (scene) => !completedStoryIds.includes(scene.storyId)
     );
+    console.log(nonRepeatingInitialScenes);
+
     return nonRepeatingInitialScenes[
       randomIntFromInterval(0, nonRepeatingInitialScenes.length)
     ];
@@ -99,14 +117,12 @@ const useScene = () => {
 
   const startNewStory = () => {
     console.log("Story completed: " + scene.storyId.toString());
+    console.log("ARRAY DE HISTÓRIAS COMPLETAS (antes): " + completedStoryIds);
     addCompletedStory(scene.storyId);
-    handleAdvance(getRandomInitialScene());
-    PlayerDeathCheck();
   };
 
   const advanceStoryWithId = (id: number) => {
     const newScene = scenes.find((scene) => scene._id === id);
-
     if (!isUndefined(newScene)) {
       handleAdvance(newScene);
     } else setScene(getRandomInitialScene());

@@ -18,6 +18,7 @@ type PlaythroughActions = {
   addItem: (newItem: Item) => void;
   setBackpack: (newBackpack: Item[]) => void;
   addCompletedStory: (storyId: number) => void;
+  resetCompletedStories: () => void;
   reset: () => void;
 };
 // TODO: Iniciar esta backpack com um 'catálogo de items'
@@ -61,6 +62,10 @@ const usePlaythroughStore = create<PlaythroughState & PlaythroughActions>()(
       addCompletedStory: (storyId: number) =>
         set((state) => ({
           completedStoryIds: [...state.completedStoryIds, storyId],
+        })),
+      resetCompletedStories: () =>
+        set(() => ({
+          completedStoryIds: [...initialState.completedStoryIds],
         })),
       reset: () => {
         set(initialState);
