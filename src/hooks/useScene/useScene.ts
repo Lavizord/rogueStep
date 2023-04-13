@@ -8,9 +8,18 @@ import { Scene } from "../../__fixtures__/fixtures";
 import usePlaythroughStore from "../../stores/usePlaythroughStore";
 import useNotification from "../useNotification/useNotification";
 import useBackpack from "../useBackpack/useBackpack";
+import { Console } from "console";
 
 const useScene = () => {
-  const { hp, addHp, addGold, reset: resetPlaythrough } = usePlaythroughStore();
+  const {
+    hp,
+    addHp,
+    addGold,
+    addCompletedStory,
+    resetCompletedStories,
+    completedStoryIds,
+    reset: resetPlaythrough,
+  } = usePlaythroughStore();
 
   const [scene, setScene] = useState<Scene>({
     _id: 999,
@@ -32,10 +41,31 @@ const useScene = () => {
     setScene(getRandomInitialScene());
   }, []);
 
+  /* 
+    Temos que usar o useEffect quando a nossa scena muda, em vez de a abordagem que estavamos a ter
+    O que significa que vamos necessitar de dar load dos nossos dados usando uma API.
+  */
+  useEffect(() => {
+    console.log(
+      "ARRAY DE HISTÓRIAS COMPLETAS (Inside hOOK): " + completedStoryIds
+    );
+    handleAdvance(getRandomInitialScene());
+    PlayerDeathCheck();
+  }, [completedStoryIds]);
+
   const getRandomInitialScene = () => {
     const initialScenes = scenes.filter((scene) => scene.type === "initial");
+    if (initialScenes.length == completedStoryIds.length) {
+      resetCompletedStories();
+      console.log("All STORIES HAVE BEEN HAD");
+    }
+    const nonRepeatingInitialScenes = initialScenes.filter(
+      (scene) => !completedStoryIds.includes(scene.storyId)
+    );
 
-    return initialScenes[randomIntFromInterval(0, initialScenes.length)];
+    return nonRepeatingInitialScenes[
+      randomIntFromInterval(0, nonRepeatingInitialScenes.length)
+    ];
   };
 
   const PlayerDeathCheck = () => {
@@ -86,13 +116,13 @@ const useScene = () => {
   };
 
   const startNewStory = () => {
-    handleAdvance(getRandomInitialScene());
-    PlayerDeathCheck();
+    console.log("Story completed: " + scene.storyId.toString());
+    console.log("ARRAY DE HISTÓRIAS COMPLETAS (antes): " + completedStoryIds);
+    addCompletedStory(scene.storyId);
   };
 
   const advanceStoryWithId = (id: number) => {
     const newScene = scenes.find((scene) => scene._id === id);
-
     if (!isUndefined(newScene)) {
       handleAdvance(newScene);
     } else setScene(getRandomInitialScene());

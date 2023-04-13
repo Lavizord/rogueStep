@@ -7,6 +7,7 @@ type PlaythroughState = {
   gold: number;
   backpack: Item[];
   maxBackpack: number;
+  completedStoryIds: number[];
 };
 
 type PlaythroughActions = {
@@ -16,11 +17,14 @@ type PlaythroughActions = {
   addGold: (goldToAdd: number) => void;
   addItem: (newItem: Item) => void;
   setBackpack: (newBackpack: Item[]) => void;
+  addCompletedStory: (storyId: number) => void;
+  resetCompletedStories: () => void;
   reset: () => void;
 };
 // TODO: Iniciar esta backpack com um 'catálogo de items'
 //       assim fica mais fácil alterar / configurar os starting items
 //       Nota: Algumas histórias podem altera os starting Items? Pensar.
+// TODO: Talvez até o próprio initialState deva ser ligo de alguma coisa.
 const initialState: PlaythroughState = {
   hp: 100,
   gold: 50,
@@ -36,6 +40,7 @@ const initialState: PlaythroughState = {
     },
   ],
   maxBackpack: 5,
+  completedStoryIds: [0],
 };
 
 const usePlaythroughStore = create<PlaythroughState & PlaythroughActions>()(
@@ -50,8 +55,18 @@ const usePlaythroughStore = create<PlaythroughState & PlaythroughActions>()(
       addGold: (goldToAdd: number) =>
         set((state) => ({ gold: state.gold + goldToAdd })),
       addItem: (newItem: Item) =>
-        set((state) => ({ backpack: { ...state.backpack, newItem } })),
+        set((state) => ({
+          backpack: { ...state.backpack, newItem },
+        })),
       setBackpack: (newBackpack: Item[]) => set({ backpack: newBackpack }),
+      addCompletedStory: (storyId: number) =>
+        set((state) => ({
+          completedStoryIds: [...state.completedStoryIds, storyId],
+        })),
+      resetCompletedStories: () =>
+        set(() => ({
+          completedStoryIds: [...initialState.completedStoryIds],
+        })),
       reset: () => {
         set(initialState);
       },

@@ -32,7 +32,7 @@ export const scenes: Scene[] = [
         choiceText: "Stay put and wait for rescue.",
       },
       {
-        nextSceneId: 3,
+        nextSceneId: 5,
         choiceText: "Stay put and wait for rescue.",
       },
     ],
@@ -220,6 +220,24 @@ export const scenes: Scene[] = [
     hpChange: 0,
     goldChange: 2,
     text: "You fight and win against the wolfs! Time to take another step!",
+    nextScene: [],
+  },
+  {
+    _id: 16,
+    type: "initial",
+    storyId: 3,
+    hpChange: 0,
+    goldChange: 2,
+    text: "Placeholder! Story ID 3 - Initial",
+    nextScene: [],
+  },
+  {
+    _id: 17,
+    type: "initial",
+    storyId: 4,
+    hpChange: 0,
+    goldChange: 2,
+    text: "Placeholder! Story ID 4 - Initial",
     nextScene: [],
   },
 ];
