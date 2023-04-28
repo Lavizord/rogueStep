@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import useAdventureStore from "../../stores/useAdventureStore";
 import useUserStore from "../../stores/useUserStore";
 import { randomIntFromInterval } from "../../utils/utils";
-import { NextScene, scenes } from "../../__fixtures__/fixtures";
+import { scenes } from "../../__fixtures__/fixtures";
 import { isUndefined } from "lodash";
-import { Scene } from "../../__fixtures__/fixtures";
+import { Scene, NextScene } from "../../utils/interfaces";
 import usePlaythroughStore from "../../stores/usePlaythroughStore";
 import useNotification from "../useNotification/useNotification";
 import useBackpack from "../useBackpack/useBackpack";
+import useGetAllScenes from "../useGetAllScenes/useGetAllScenes";
 
 const useScene = () => {
   const { hp, addHp, addGold, reset: resetPlaythrough } = usePlaythroughStore();
@@ -21,6 +22,13 @@ const useScene = () => {
     text: "Take a step...",
     nextScene: [],
   });
+
+  const { data: allScenes, isLoading } = useGetAllScenes();
+
+  useEffect(() => {
+    console.log("isLoading", isLoading);
+    console.log("allScenes: ", allScenes);
+  }, [isLoading, allScenes]);
 
   const { addSteps, steps, reset: resetAdventure } = useAdventureStore();
   const { addtotalSteps, addtotalPlaythrough } = useUserStore();

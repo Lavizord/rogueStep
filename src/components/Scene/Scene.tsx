@@ -3,7 +3,7 @@ import SceneChoice from "../SceneChoice/SceneChoice";
 import SceneText from "../SceneText/SceneText";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import { NextScene } from "../../__fixtures__/fixtures";
+import { NextScene } from "../../utils/interfaces";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#dfdfdf",

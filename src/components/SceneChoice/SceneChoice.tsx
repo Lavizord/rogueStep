@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import ChoiceCard from "../ChoiceCard/ChoiceCard";
 import { isUndefined } from "lodash";
-import { NextScene } from "../../__fixtures__/fixtures";
+import { NextScene } from "../../utils/interfaces";
 import { v4 as uuidv4 } from "uuid";
 
 type Props = {
