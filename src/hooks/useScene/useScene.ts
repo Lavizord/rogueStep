@@ -9,6 +9,7 @@ import usePlaythroughStore from "../../stores/usePlaythroughStore";
 import useNotification from "../useNotification/useNotification";
 import useBackpack from "../useBackpack/useBackpack";
 import useGetAllScenes from "../useGetAllScenes/useGetAllScenes";
+import useGetRndInitScene from "../useGetRndInitScene/useGetRndInitScene";
 
 const useScene = () => {
   const { hp, addHp, addGold, reset: resetPlaythrough } = usePlaythroughStore();
@@ -23,7 +24,7 @@ const useScene = () => {
     nextScene: [],
   });
 
-  const { data: allScenes, isLoading } = useGetAllScenes();
+  const { data: allScenes, isLoading } = useGetRndInitScene();
 
   useEffect(() => {
     console.log("isLoading", isLoading);
