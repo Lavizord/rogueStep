@@ -10,6 +10,7 @@ import useNotification from "../useNotification/useNotification";
 import useBackpack from "../useBackpack/useBackpack";
 import useGetAllScenes from "../useGetAllScenes/useGetAllScenes";
 import useGetRndInitScene from "../useGetRndInitScene/useGetRndInitScene";
+import useGetCompleteScene from "../useGetCompleteScene/useGetCompleteScene";
 
 const useScene = () => {
   const { hp, addHp, addGold, reset: resetPlaythrough } = usePlaythroughStore();

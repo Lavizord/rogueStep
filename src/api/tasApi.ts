@@ -6,6 +6,7 @@ const endpoints = {
   getScenes: `/scenes/`,
   getSceneEffect: (id: string) => `/sceneEffect/${id}`,
   getRndInitScene: `/scenes/random/initial/`,
+  getCompleteScene: (id: string) => `/scene/complete/from/${id}`,
 };
 
 export const getScene = async (params: SceneApiParams) => {
@@ -25,5 +26,10 @@ export const getSceneEffect = async (params: SceneApiParams) => {
 
 export const getRndInitScene = async () => {
   const { data } = await axiosApi.get(endpoints.getRndInitScene);
+  return data;
+};
+
+export const getCompleteScene = async (params: SceneApiParams) => {
+  const { data } = await axiosApi.get(endpoints.getCompleteScene(params.id));
   return data;
 };
