@@ -8,8 +8,8 @@ import { Scene, NextScene } from "../../utils/interfaces";
 import usePlaythroughStore from "../../stores/usePlaythroughStore";
 import useNotification from "../useNotification/useNotification";
 import useBackpack from "../useBackpack/useBackpack";
-import useGetAllScenes from "../useGetAllScenes/useGetAllScenes";
-import useGetRndInitScene from "../useGetRndInitScene/useGetRndInitScene";
+import useGetRandomScene from "../useGetRandomScene/useGetRandomScene";
+import useGetScene from "../useGetScene/useGetScene";
 
 const useScene = () => {
   const { hp, addHp, addGold, reset: resetPlaythrough } = usePlaythroughStore();
@@ -18,18 +18,30 @@ const useScene = () => {
     _id: 999,
     type: "tas",
     storyId: 0,
-    hpChange: 0,
-    goldChange: 0,
+    sceneEffect: {
+      hpChange: 0,
+      goldChange: 0,
+    },
     text: "Take a step...",
-    nextScene: [],
+    choices: [],
   });
 
-  const { data: allScenes, isLoading } = useGetRndInitScene();
+  const {
+    data: randomScene,
+    isLoading: isLoadingRandomScene,
+    refetch: refetchRandomScene,
+  } = useGetRandomScene();
+
+  const {
+    data: sceneData,
+    isLoading: isLoadingScene,
+    refetch: refetchScene,
+  } = useGetScene({ id: "1" });
 
   useEffect(() => {
-    console.log("isLoading", isLoading);
-    console.log("allScenes: ", allScenes);
-  }, [isLoading, allScenes]);
+    console.log("isLoading", isLoadingRandomScene);
+    console.log("randomScene: ", randomScene);
+  }, [isLoadingRandomScene, randomScene]);
 
   const { addSteps, steps, reset: resetAdventure } = useAdventureStore();
   const { addtotalSteps, addtotalPlaythrough } = useUserStore();
@@ -38,8 +50,9 @@ const useScene = () => {
   const { handleAddBackpackByIds } = useBackpack();
 
   useEffect(() => {
-    setScene(getRandomInitialScene());
-  }, []);
+    if (!isLoadingRandomScene && !isUndefined(randomScene))
+      setScene(randomScene);
+  }, [randomScene]);
 
   const getRandomInitialScene = () => {
     const initialScenes = scenes.filter((scene) => scene.type === "initial");
@@ -58,22 +71,23 @@ const useScene = () => {
   };
 
   const handleAdvance = (sceneToAdvance: Scene) => {
+    const { hpChange, goldChange } = sceneToAdvance.sceneEffect;
     addSteps(1);
-    addHp(sceneToAdvance.hpChange);
-    addGold(sceneToAdvance.goldChange);
+    addHp(hpChange);
+    addGold(goldChange);
     setScene(sceneToAdvance);
-    if (sceneToAdvance.goldChange !== 0) {
+    if (goldChange !== 0) {
       sendNotification({
-        textToShow: `${sceneToAdvance.goldChange} gold changed!`,
+        textToShow: `${goldChange} gold changed!`,
         style: {
           backgroundColor: "gold",
           color: "black",
         },
       });
     }
-    if (sceneToAdvance.hpChange !== 0) {
+    if (hpChange !== 0) {
       sendNotification({
-        textToShow: `${sceneToAdvance.hpChange} hp changed!`,
+        textToShow: `${hpChange} hp changed!`,
         style: {
           backgroundColor: "red",
           color: "white",
@@ -95,7 +109,7 @@ const useScene = () => {
   };
 
   const startNewStory = () => {
-    handleAdvance(getRandomInitialScene());
+    handleAdvance(refetchRandomScene());
     PlayerDeathCheck();
   };
 
@@ -104,7 +118,7 @@ const useScene = () => {
 
     if (!isUndefined(newScene)) {
       handleAdvance(newScene);
-    } else setScene(getRandomInitialScene());
+    } else refetchRandomScene();
     PlayerDeathCheck();
   };
 

@@ -2,7 +2,7 @@ import axios from "axios";
 import applyConverters from "axios-case-converter";
 import { stringify } from "qs";
 
-const baseURL = "http://25.57.255.123:5005";
+const baseURL = "http://25.94.99.36:5005";
 
 const axiosInstance = applyConverters(
   axios.create({
@@ -14,7 +14,7 @@ const axiosInstance = applyConverters(
       "Access-Control-Allow-Methods": "*",
       "Content-Type": "application/json",
     },
-    paramsSerializer: (params) =>
+    paramsSerializer: (params: any) =>
       stringify(params, {
         arrayFormat: "repeat",
       }),

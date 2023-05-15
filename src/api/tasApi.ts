@@ -2,8 +2,9 @@ import { SceneApiParams } from "../utils/interfaces";
 import axiosApi from "./config";
 
 const endpoints = {
-  getScene: (id: string) => `/scenes/${id}`,
   getScenes: `/scenes/`,
+  getRandomScene: `/scenes/initial/random`,
+  getScene: (id: string) => `/scenes/${id}`,
   getSceneEffect: (id: string) => `/sceneEffect/${id}`,
   getRndInitScene: `/scenes/random/initial/`,
 };
@@ -25,5 +26,10 @@ export const getSceneEffect = async (params: SceneApiParams) => {
 
 export const getRndInitScene = async () => {
   const { data } = await axiosApi.get(endpoints.getRndInitScene);
+  return data;
+};
+export const getRandomScene = async () => {
+  const { data } = await axiosApi.get(endpoints.getRandomScene);
+
   return data;
 };
