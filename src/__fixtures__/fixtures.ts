@@ -1,14 +1,14 @@
-import { Scene } from "../utils/interfaces";
-
-export const scenes: Scene[] = [
+export const scenes = [
   {
     _id: 1,
     type: "initial",
     storyId: 1,
-    hpChange: 0,
-    goldChange: 0,
+    sceneEffect: {
+      hpChange: 0,
+      goldChange: 0,
+    },
     text: "You wake up on a deserted island. You see smoke rising in the distance. What do you do?",
-    nextScene: [
+    choices: [
       {
         nextSceneId: 2,
         choiceText: "Head towards the smoke.",

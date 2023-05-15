@@ -27,7 +27,7 @@ const Main: React.FC = () => {
 
   const { steps } = useAdventureStore();
 
-  const { text, nextScene } = scene;
+  const { text, choices: nextScene } = scene;
 
   return (
     <>

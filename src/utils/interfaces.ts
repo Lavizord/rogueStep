@@ -3,14 +3,18 @@ export interface NextScene {
   choiceText?: string;
   itemIds?: number[];
 }
+
+export interface SceneEffect {
+  hpChange: number;
+  goldChange: number;
+}
 export interface Scene {
   _id: number;
   type?: string;
   storyId: number;
-  hpChange: number;
-  goldChange: number;
+  sceneEffect: SceneEffect;
   text: string;
-  nextScene: NextScene[];
+  choices: NextScene[];
   itemIds?: number[];
 }
 

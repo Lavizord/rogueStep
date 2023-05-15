@@ -1,17 +1,18 @@
-import { Scene, SceneApiParams } from "../../utils/interfaces";
+import { Scene } from "../../utils/interfaces";
 import { useMemo } from "react";
 import { useQuery } from "react-query";
 import api from "../../api/";
 
-type Hook = (params: SceneApiParams) => {
+type Hook = () => {
   data?: Scene;
   isLoading: boolean;
-  refetch: ({ params: { id: string } }) => void;
+  refetch: () => void;
 };
-const useGetScene: Hook = (params: SceneApiParams) => {
+
+const useGetRandomScene: Hook = () => {
   const { data, isLoading, refetch } = useQuery<Scene>(
-    ["scene_id"],
-    () => api.getScene(params),
+    [],
+    () => api.getRandomScene(),
     {
       staleTime: 30000,
     }
@@ -22,4 +23,4 @@ const useGetScene: Hook = (params: SceneApiParams) => {
   }, [data, isLoading, refetch]);
 };
 
-export default useGetScene;
+export default useGetRandomScene;
